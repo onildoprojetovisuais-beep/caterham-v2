@@ -4239,157 +4239,63 @@
   });
 })();
 
-  // ── Seções 9-11: Caterham Exp + Pilotos
-/* ============================================================
-   SECTION 9 — Mosaic caption hover via touch on mobile
-   ============================================================ */
+  /* -- Caterham Exp Cinematic Scroll (sec-caterham-exp) -- */
 (function() {
-  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-  if (!isTouchDevice) return;
-
-  var cells = document.querySelectorAll('.cte-cell');
-
-  cells.forEach(function(cell) {
-    cell.addEventListener('touchstart', function() {
-      var cap = this.querySelector('.cte-cap');
-      if (!cap) return;
-      var isVisible = cap.style.opacity === '1';
-      // Reset all
-      cells.forEach(function(c) {
-        var cp = c.querySelector('.cte-cap');
-        if (cp) {
-          cp.style.opacity = '0';
-          cp.style.transform = 'translateY(6px)';
-        }
-      });
-      if (!isVisible) {
-        cap.style.opacity = '1';
-        cap.style.transform = 'translateY(0)';
+  var section   = document.getElementById('sec-caterham-exp');
+  var cards     = section ? section.querySelectorAll('.cte-card') : [];
+  var textItems = section ? section.querySelectorAll('.cte-text-item') : [];
+  var intro     = document.getElementById('cteIntro');
+  var idxEl     = document.getElementById('cteIdx');
+  var n = cards.length;
+  if (!n) return;
+  function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  var lastActive = -1;
+  function update() {
+    var vh = window.innerHeight;
+    var rect = section.getBoundingClientRect();
+    var scrollRange = Math.max(1, section.offsetHeight - vh);
+    var progress = clamp(-rect.top / scrollRange, 0, 1);
+    var step = progress * (n - 1);
+    var activeImg = Math.min(Math.floor(step), n - 1);
+    var t = step - Math.floor(step);
+    if (intro) intro.style.opacity = (1 - clamp(step / 0.8, 0, 1)).toFixed(4);
+    cards.forEach(function(card, i) {
+      var scale, opacity, ty;
+      if (i < activeImg) {
+        scale = 0.92; opacity = 0.12; ty = -40;
+      } else if (i === activeImg) {
+        scale = lerp(1.0, 0.92, t); opacity = lerp(1.0, 0.12, t); ty = lerp(0, -40, t);
+      } else if (i === activeImg + 1) {
+        scale = lerp(1.08, 1.0, t); opacity = lerp(0.0, 1.0, t); ty = lerp(20, 0, t);
+      } else {
+        scale = 1.08; opacity = 0; ty = 20;
       }
-    }, { passive: true });
-  });
-})();
-
-/* ============================================================
-   SECTION 10 — Staggered entrance for "words" on scroll
-   ============================================================ */
-(function() {
-  var wordSpans = document.querySelectorAll('.cat-what-words span');
-
-  if (!wordSpans.length) return;
-
-  wordSpans.forEach(function(span, i) {
-    span.style.opacity = '0';
-    span.style.transform = 'translateY(24px)';
-    span.style.transition = 'opacity 600ms ease ' + (i * 160) + 'ms, transform 600ms ease ' + (i * 160) + 'ms';
-  });
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        wordSpans.forEach(function(span) {
-          span.style.opacity = '1';
-          span.style.transform = 'translateY(0)';
-        });
-        observer.disconnect();
-      }
+      card.style.transform = 'scale(' + scale.toFixed(4) + ') translateY(' + ty.toFixed(1) + 'px)';
+      card.style.opacity   = opacity.toFixed(4);
     });
-  }, { threshold: 0.3 });
-
-  var wordsContainer = document.querySelector('.cat-what-words');
-  if (wordsContainer) observer.observe(wordsContainer);
-})();
-
-/* ============================================================
-   SECTION 11 — Pilot cards staggered entrance
-   ============================================================ */
-(function() {
-  var cards = document.querySelectorAll('.plt-new-card');
-
-  if (!cards.length) return;
-
-  cards.forEach(function(card, i) {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(32px)';
-    card.style.transition = 'opacity 500ms ease ' + (i * 80) + 'ms, transform 500ms ease ' + (i * 80) + 'ms, border-color 300ms ease';
-  });
-
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        cards.forEach(function(card) {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        });
-        revealObserver.disconnect();
+    textItems.forEach(function(item, i) {
+      var op, ty;
+      if (i < activeImg) {
+        op = 0; ty = -24;
+      } else if (i === activeImg) {
+        var outP = clamp(t / 0.28, 0, 1); op = 1 - outP; ty = lerp(0, -24, outP);
+      } else if (i === activeImg + 1) {
+        var inP = clamp((t - 0.72) / 0.28, 0, 1); op = inP; ty = lerp(24, 0, inP);
+      } else {
+        op = 0; ty = 24;
       }
+      item.style.opacity   = op.toFixed(4);
+      item.style.transform = 'translateY(' + ty.toFixed(1) + 'px)';
     });
-  }, { threshold: 0.15 });
-
-  var grid = document.querySelector('.plt-new-grid');
-  if (grid) revealObserver.observe(grid);
-})();
-
-/* ============================================================
-   SECTION 9 — Mosaic cells staggered entrance
-   ============================================================ */
-(function() {
-  var cells = document.querySelectorAll('.cte-cell');
-
-  if (!cells.length) return;
-
-  cells.forEach(function(cell, i) {
-    cell.style.opacity = '0';
-    cell.style.transition = 'opacity 700ms ease ' + (i * 55) + 'ms';
-  });
-
-  var mosaicObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        cells.forEach(function(cell) {
-          cell.style.opacity = '1';
-        });
-        mosaicObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.05 });
-
-  var mosaic = document.querySelector('.cte-mosaic');
-  if (mosaic) mosaicObserver.observe(mosaic);
-})();
-
-/* ============================================================
-   SECTION 10 — Stats count-up animation (plain numbers)
-   ============================================================ */
-(function() {
-  var statsSection = document.querySelector('.cat-what-stats');
-  if (!statsSection) return;
-
-  var triggered = false;
-
-  var statsObserver = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting && !triggered) {
-      triggered = true;
-      // Animate the stats items into view
-      var stats = statsSection.querySelectorAll('.cat-what-stat');
-      stats.forEach(function(stat, i) {
-        stat.style.opacity = '0';
-        stat.style.transform = 'translateY(20px)';
-        stat.style.transition = 'opacity 500ms ease ' + (i * 120) + 'ms, transform 500ms ease ' + (i * 120) + 'ms';
-        // Trigger
-        requestAnimationFrame(function() {
-          requestAnimationFrame(function() {
-            stat.style.opacity = '1';
-            stat.style.transform = 'translateY(0)';
-          });
-        });
-      });
-      statsObserver.disconnect();
+    if (activeImg !== lastActive) {
+      if (idxEl) idxEl.textContent = (activeImg + 1).toString().padStart(2,'0');
+      lastActive = activeImg;
     }
-  }, { threshold: 0.4 });
-
-  statsObserver.observe(statsSection);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
 })();
 
   // ── Seções 12-13: Depoimentos + CTA
