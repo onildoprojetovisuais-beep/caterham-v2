@@ -1001,159 +1001,102 @@
    SECTION 3: APPLE SCROLL STORYTELLING
    ============================================================ */
 
-.scroll-story-section {
-  background: var(--ink);
-  width: 100%;
-  overflow: hidden;
-}
+/* ═══ SEÇÃO 3: SCROLL STORY — CINEMATIC FULLSCREEN ═══ */
 
-.scroll-story-inner {
-  display: grid;
-  grid-template-columns: 55vw 1fr;
-  align-items: flex-start;
-  min-height: 100vh;
-}
+#sec-custom { background: var(--ink); }
 
-/* LEFT: sticky image panel */
-.scroll-story-media {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.scroll-story-img-wrap {
+.story-blk {
   position: relative;
-  width: 100%;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
-.scroll-story-img {
+.story-blk[data-align='right'] { justify-content: flex-end; }
+.story-blk[data-align='left']  { justify-content: flex-start; }
+
+/* Background image with Ken Burns */
+.story-blk-bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
+}
+.story-blk-bg img {
+  width: 100%; height: 100%;
   object-fit: cover;
+  transform: scale(1.09);
+  transition: transform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.story-blk.story-vis .story-blk-bg img { transform: scale(1); }
+
+/* Directional veil */
+.story-blk-veil {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.story-blk[data-align='left'] .story-blk-veil {
+  background:
+    linear-gradient(105deg, rgba(1,12,14,.92) 0%, rgba(1,12,14,.65) 45%, rgba(1,12,14,.08) 100%),
+    linear-gradient(180deg, transparent 40%, rgba(1,12,14,.7) 100%);
+}
+.story-blk[data-align='right'] .story-blk-veil {
+  background:
+    linear-gradient(-105deg, rgba(1,12,14,.92) 0%, rgba(1,12,14,.65) 45%, rgba(1,12,14,.08) 100%),
+    linear-gradient(180deg, transparent 40%, rgba(1,12,14,.7) 100%);
+}
+
+/* Content panel */
+.story-blk-content {
+  position: relative; z-index: 2;
+  padding: 0 80px 88px;
+  max-width: 640px;
   opacity: 0;
-  transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity;
+  transform: translateY(40px);
+  transition: opacity .85s ease .35s, transform .85s cubic-bezier(.2,.8,.2,1) .35s;
 }
+.story-blk.story-vis .story-blk-content { opacity: 1; transform: translateY(0); }
+.story-blk[data-align='right'] .story-blk-content { padding: 0 80px 88px; }
 
-.scroll-story-img.scroll-story-img--active {
-  opacity: 1;
+.story-blk-num {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .28em;
+  color: var(--lime); opacity: .7;
+  margin-bottom: 18px;
 }
-
-/* RIGHT: scrollable text blocks */
-.scroll-story-texts {
-  padding: 0 56px 0 52px;
-  max-width: 560px;
-}
-
-.scroll-story-block {
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40vh 0;
-}
-
-.scroll-story-block:first-child {
-  padding-top: 20vh;
-}
-
-.scroll-story-block:last-child {
-  padding-bottom: 20vh;
-}
-
-.scroll-story-text {
-  padding-left: 16px;
-  border-left: 2px solid var(--paper-08);
-  transition: border-color 400ms ease;
-}
-
-.scroll-story-block.scroll-story-block--active .scroll-story-text {
-  border-left-color: var(--lime);
-}
-
-.scroll-story-headline {
+.story-blk-label { margin-bottom: 14px; display: block; }
+.story-blk-h {
   font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  line-height: 1.05;
-  text-transform: uppercase;
-  color: var(--paper);
-  letter-spacing: -0.01em;
-  margin: 12px 0 16px;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(48px, 6.5vw, 100px);
+  line-height: .9; letter-spacing: -.02em;
+  color: var(--paper); margin-bottom: 24px;
 }
-
-.scroll-story-body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  line-height: 1.7;
-  color: var(--paper-60);
-  margin: 0;
+.story-blk-h em { color: var(--lime); font-style: italic; }
+.story-blk-p {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: clamp(15px, 1.3vw, 18px); line-height: 1.65;
+  color: var(--paper-60); max-width: 420px;
 }
-
-/* Mobile image slots — hidden on desktop */
-.scroll-story-mobile-img {
-  display: none;
+.story-blk-line {
+  width: 40px; height: 2px; background: var(--lime);
+  margin-top: 28px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .6s cubic-bezier(.16,1,.3,1) .8s;
 }
+.story-blk.story-vis .story-blk-line { transform: scaleX(1); }
 
-/* MOBILE */
 @media (max-width: 768px) {
-  .scroll-story-inner {
-    display: block;
-    padding: 0 22px;
+  .story-blk { height: 100svh; align-items: flex-end; }
+  .story-blk-content { padding: 0 24px 72px; max-width: 100%; }
+  .story-blk[data-align='right'] .story-blk-content { padding: 0 24px 72px; }
+  .story-blk[data-align='left'] .story-blk-veil,
+  .story-blk[data-align='right'] .story-blk-veil {
+    background: linear-gradient(180deg, transparent 20%, rgba(1,12,14,.88) 70%, rgba(1,12,14,.97) 100%);
   }
-
-  .scroll-story-media {
-    display: none; /* replaced by inline mobile images */
-  }
-
-  .scroll-story-texts {
-    width: 100%;
-  }
-
-  .scroll-story-block {
-    min-height: unset;
-    padding: 48px 0;
-    gap: 28px;
-  }
-
-  .scroll-story-block:first-child { padding-top: 56px; }
-  .scroll-story-block:last-child  { padding-bottom: 56px; }
-
-  .scroll-story-mobile-img {
-    display: block;
-    width: 70vw;
-    height: 56vw;
-    margin: 0 auto;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .scroll-story-mobile-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .scroll-story-text {
-    padding-left: 0;
-    border-left: none;
-    text-align: center;
-  }
-
-  .scroll-story-headline {
-    font-size: clamp(1.5rem, 7vw, 2.2rem);
-  }
+  .story-blk-h { font-size: 42px; }
 }
-
 
 /* ============================================================
    SECTION 4: LABORATÓRIO DE PERFORMANCE
@@ -1863,69 +1806,75 @@
   overflow: hidden;
 }
 
-.people-inner {
-  max-width: 860px !important;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 56px;
+/* ═══ SEÇÃO 8: PESSOAS — EDITORIAL ═══ */
+
+#sec-people {
+  position: relative;
+  padding: 160px 0;
+  background: var(--emerald-d);
+  overflow: hidden;
 }
 
-.people-line-top,
-.people-line-bottom {
-  height: 1px;
-  background: var(--lime);
-  opacity: .5;
-  transform-origin: left center;
+.ppl-bg-img {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.ppl-bg-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .08;
+  filter: saturate(0) brightness(.8);
 }
 
-.people-line-top[data-r],
-.people-line-bottom[data-r] {
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: opacity .9s ease, transform 1s cubic-bezier(.16,1,.3,1);
+.ppl-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 60% at 70% 50%, rgba(202,211,2,.04) 0%, transparent 70%),
+    radial-gradient(50% 70% at 10% 90%, rgba(1,79,72,.4) 0%, transparent 60%);
 }
 
-.people-line-top[data-r].in,
-.people-line-bottom[data-r].in {
-  opacity: .5;
-  transform: scaleX(1);
+.ppl-inner {
+  position: relative; z-index: 2;
+  max-width: 960px !important;
 }
 
-.people-quote {
-  padding: 0 4px;
+.ppl-kicker {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 56px;
 }
+.ppl-rule {
+  flex: 1; height: 1px; background: var(--paper-18);
+}
+.ppl-kicker .label::before { display: none; }
+.ppl-kicker .label { padding: 0; }
 
-.people-text {
+.ppl-headline {
   font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-weight: 700;
-  font-size: clamp(26px, 3.5vw, 50px);
-  line-height: 1.12;
-  letter-spacing: -.005em;
-  color: var(--paper);
-  text-transform: uppercase;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: .95; letter-spacing: -.015em;
+  color: var(--paper); margin-bottom: 48px;
 }
+.ppl-headline em { color: var(--lime); font-style: italic; }
 
-.people-text em {
-  color: var(--lime);
-  font-style: italic;
-  font-weight: 700;
+.ppl-body-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  padding-top: 40px; border-top: 1px solid var(--paper-08);
 }
-
 @media (max-width: 768px) {
-  #sec-people {
-    padding: 100px 0;
-  }
-
-  .people-text {
-    font-size: clamp(24px, 6vw, 36px);
-  }
-
-  .people-inner {
-    gap: 40px;
-  }
+  .ppl-body-wrap { grid-template-columns: 1fr; gap: 20px; }
 }
+
+.ppl-body {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 1.8; color: var(--paper-60);
+}
+
+.ppl-rule-bottom {
+  height: 1px; background: var(--paper-08);
+  margin-top: 64px;
+}
+
 
     /* ═══ SEÇÃO 9-11: CATERHAM EXP + SPECS + PILOTOS ═══ */
 /* ============================================================
@@ -3083,113 +3032,98 @@
 <!-- ============================================================
      SECTION 3: APPLE SCROLL STORYTELLING
      ============================================================ -->
-<section id="sec-custom" class="scroll-story-section">
-  <div class="scroll-story-inner">
-
-    <!-- Sticky image panel (desktop) -->
-    <div class="scroll-story-media" aria-hidden="true">
-      <div class="scroll-story-img-wrap">
-        <img class="scroll-story-img scroll-story-img--active" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2489.jpg" alt="Adaptada para você" loading="lazy" data-idx="0">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2967.jpg" alt="Ativações" loading="lazy" data-idx="1">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2979.jpg" alt="Experiência Caterham" loading="lazy" data-idx="2">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3027.jpg" alt="Pilotos profissionais" loading="lazy" data-idx="3">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-4926.jpg" alt="Networking" loading="lazy" data-idx="4">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5071.jpg" alt="Programação flexível" loading="lazy" data-idx="5">
-        <img class="scroll-story-img" src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5079.jpg" alt="Experiências exclusivas" loading="lazy" data-idx="6">
-      </div>
+<section id="sec-custom">
+  <div class="story-blk" data-align="left">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2489.jpg" alt="Customização" loading="eager">
     </div>
-
-    <!-- Scrollable text column -->
-    <div class="scroll-story-texts">
-
-      <!-- Mobile image slots (rendered inline, hidden on desktop) -->
-
-      <!-- Block 1 -->
-      <div class="scroll-story-block" data-story-idx="0">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2489.jpg" alt="Adaptada para você" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Customização</span>
-          <h3 class="scroll-story-headline">Adaptada<br>para você</h3>
-          <p class="scroll-story-body">Cada edição pode ser customizada para o perfil da sua empresa.</p>
-        </div>
-      </div>
-
-      <!-- Block 2 -->
-      <div class="scroll-story-block" data-story-idx="1">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2967.jpg" alt="Ativações" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Ativações</span>
-          <h3 class="scroll-story-headline">Inspiradas no<br>automobilismo</h3>
-          <p class="scroll-story-body">Experiências inspiradas no automobilismo</p>
-        </div>
-      </div>
-
-      <!-- Block 3 -->
-      <div class="scroll-story-block" data-story-idx="2">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2979.jpg" alt="Experiência Caterham" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Caterham Seven</span>
-          <h3 class="scroll-story-headline">Experiência<br>Caterham</h3>
-          <p class="scroll-story-body">Contato direto com o Caterham Seven</p>
-        </div>
-      </div>
-
-      <!-- Block 4 -->
-      <div class="scroll-story-block" data-story-idx="3">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3027.jpg" alt="Pilotos profissionais" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Pilotos</span>
-          <h3 class="scroll-story-headline">Pilotos<br>profissionais</h3>
-          <p class="scroll-story-body">Interação com nomes do automobilismo nacional</p>
-        </div>
-      </div>
-
-      <!-- Block 5 -->
-      <div class="scroll-story-block" data-story-idx="4">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-4926.jpg" alt="Networking" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Networking</span>
-          <h3 class="scroll-story-headline">Relacionamento<br>genuíno</h3>
-          <p class="scroll-story-body">Relacionamento genuíno em um ambiente único</p>
-        </div>
-      </div>
-
-      <!-- Block 6 -->
-      <div class="scroll-story-block" data-story-idx="5">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5071.jpg" alt="Programação flexível" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Programação</span>
-          <h3 class="scroll-story-headline">Programação<br>flexível</h3>
-          <p class="scroll-story-body">Formato adaptado aos seus objetivos</p>
-        </div>
-      </div>
-
-      <!-- Block 7 -->
-      <div class="scroll-story-block" data-story-idx="6">
-        <div class="scroll-story-mobile-img">
-          <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5079.jpg" alt="Experiências exclusivas" loading="lazy">
-        </div>
-        <div class="scroll-story-text" data-r>
-          <span class="label">Exclusividade</span>
-          <h3 class="scroll-story-headline">Experiências<br>exclusivas</h3>
-          <p class="scroll-story-body">Para convidados, clientes e equipes</p>
-        </div>
-      </div>
-
-    </div><!-- /.scroll-story-texts -->
-  </div><!-- /.scroll-story-inner -->
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">01</span>
+      <span class="label story-blk-label">Customização</span>
+      <h2 class="story-blk-h">Adaptada<br><em>para você</em></h2>
+      <p class="story-blk-p">Cada edição é moldada ao perfil dos participantes, objetivos da empresa e formato do evento.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="right">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2967.jpg" alt="Ativações" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">02</span>
+      <span class="label story-blk-label">Ativações</span>
+      <h2 class="story-blk-h">Inspiradas no<br><em>automobilismo</em></h2>
+      <p class="story-blk-p">Experiências criadas para aproximar equipes da dinâmica presente nas equipes de corrida.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="left">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2979.jpg" alt="Caterham Seven" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">03</span>
+      <span class="label story-blk-label">Caterham Seven</span>
+      <h2 class="story-blk-h">Experiência<br><em>Caterham</em></h2>
+      <p class="story-blk-p">Contato direto com o Caterham Seven — precisão, leveza e reação imediata ao comando.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="right">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3027.jpg" alt="Pilotos Profissionais" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">04</span>
+      <span class="label story-blk-label">Pilotos Profissionais</span>
+      <h2 class="story-blk-h">Ao lado de quem<br><em>vive o limite</em></h2>
+      <p class="story-blk-p">Interação com nomes que construíram carreiras dentro do automobilismo nacional de alto nível.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="left">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-4926.jpg" alt="Networking" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">05</span>
+      <span class="label story-blk-label">Networking</span>
+      <h2 class="story-blk-h">Relacionamento<br><em>genuíno</em></h2>
+      <p class="story-blk-p">Um ambiente onde conexões surgem naturalmente a partir das experiências vividas na pista.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="right">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5071.jpg" alt="Programação" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">06</span>
+      <span class="label story-blk-label">Programação</span>
+      <h2 class="story-blk-h">Programação<br><em>flexível</em></h2>
+      <p class="story-blk-p">Formato adaptado para os objetivos estratégicos da sua empresa e o perfil do seu time.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
+  <div class="story-blk" data-align="left">
+    <div class="story-blk-bg">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-3/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-5079.jpg" alt="Experiências" loading="lazy">
+    </div>
+    <div class="story-blk-veil"></div>
+    <div class="story-blk-content">
+      <span class="story-blk-num mono">07</span>
+      <span class="label story-blk-label">Experiências</span>
+      <h2 class="story-blk-h">Momentos<br><em>exclusivos</em></h2>
+      <p class="story-blk-p">Para convidados, clientes e equipes — uma jornada que transforma perspectivas e resultados.</p>
+      <div class="story-blk-line"></div>
+    </div>
+  </div>
 </section>
 
 
@@ -3442,16 +3376,31 @@
      §8  UM AMBIENTE QUE APROXIMA PESSOAS
 ════════════════════════════════════════════════════════ -->
 <section id="sec-people">
-  <div class="people-inner wrap">
-    <div class="people-line-top" data-r></div>
-    <div class="people-quote" data-r="up">
-      <p class="people-text">
-        Um ambiente onde experiências são trocadas naturalmente,
-        <em>sem roteiros prontos e sem interações forçadas.</em>
-        As conversas surgem a partir dos desafios vividos durante o dia, das experiências profissionais de cada participante e dos temas que conectam pessoas que convivem diariamente com responsabilidade, colaboração, tomada de decisão e busca por resultados.
+  <div class="ppl-bg-img">
+    <img src="Brand/Imagem/se%C3%A7%C3%A3o-7/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2731.jpg" alt="" aria-hidden="true" loading="lazy">
+  </div>
+  <div class="ppl-overlay"></div>
+  <div class="wrap ppl-inner">
+    <div class="ppl-kicker" data-r>
+      <div class="ppl-rule"></div>
+      <span class="label">Conexões reais</span>
+      <div class="ppl-rule"></div>
+    </div>
+    <h2 class="ppl-headline" data-r="up">
+      Um ambiente onde<br>experiências são<br>trocadas <em>naturalmente.</em>
+    </h2>
+    <div class="ppl-body-wrap" data-r="up">
+      <p class="ppl-body">
+        As conversas surgem a partir dos desafios vividos durante o dia, das experiências
+        profissionais de cada participante e dos temas que conectam pessoas que convivem
+        diariamente com responsabilidade, colaboração, tomada de decisão e busca por resultados.
+      </p>
+      <p class="ppl-body">
+        Sem roteiros prontos. Sem interações forçadas.
+        Apenas contexto, desafio e conexão real.
       </p>
     </div>
-    <div class="people-line-bottom" data-r></div>
+    <div class="ppl-rule-bottom" data-r></div>
   </div>
 </section>
 
@@ -4042,98 +3991,23 @@
   var section = document.getElementById('sec-custom');
   if (!section) return;
 
-  var blocks = section.querySelectorAll('.scroll-story-block');
-  var imgs   = section.querySelectorAll('.scroll-story-img');
+  var blocks = section.querySelectorAll('.
 
-  if (!blocks.length || !imgs.length) return;
-
-  function setActiveIdx(idx) {
-    imgs.forEach(function (img) {
-      img.classList.remove('scroll-story-img--active');
-    });
-    blocks.forEach(function (blk) {
-      blk.classList.remove('scroll-story-block--active');
-    });
-
-    var targetImg = section.querySelector('.scroll-story-img[data-idx="' + idx + '"]');
-    if (targetImg) targetImg.classList.add('scroll-story-img--active');
-    if (blocks[idx]) blocks[idx].classList.add('scroll-story-block--active');
-  }
-
-  // Only run sticky behaviour above mobile breakpoint
-  var mediaQuery = window.matchMedia('(min-width: 769px)');
-
-  function initObserver() {
-    if (!mediaQuery.matches) return;
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var idx = parseInt(entry.target.dataset.storyIdx, 10);
-          setActiveIdx(idx);
+  // ── Story Blocks (cinematic fullscreen, Ken Burns + slide-up) ──
+  (function() {
+    var blocks = document.querySelectorAll('.story-blk');
+    if (!blocks.length) return;
+    var sio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('story-vis');
         }
       });
-    }, {
-      threshold: 0.5,
-      rootMargin: '0px 0px -10% 0px'
-    });
-
-    blocks.forEach(function (block) { observer.observe(block); });
-    return observer;
-  }
-
-  // Initialise
-  setActiveIdx(0);
-  var activeObserver = initObserver();
-
-  // Re-initialise on resize crossing breakpoint
-  mediaQuery.addEventListener('change', function () {
-    if (activeObserver) activeObserver.disconnect();
-    setActiveIdx(0);
-    activeObserver = initObserver();
-  });
-})();
+    }, { threshold: 0.25 });
+    blocks.forEach(function(b) { sio.observe(b); });
+  })();
 
 
-/* ============================================================
-   SECTION 4: LAB — scroll reveal (data-r support)
-   Ensure .lab- elements with data-r get animated by the
-   global reveal observer (or bootstrap one if not present)
-   ============================================================ */
-(function () {
-  // Only bootstrap a fallback if the global reveal hasn't been set up
-  if (window.__revealObserverActive) return;
-
-  var candidates = document.querySelectorAll('[data-r]');
-  if (!candidates.length) return;
-
-  // If IntersectionObserver isn't available, just show everything
-  if (!('IntersectionObserver' in window)) {
-    candidates.forEach(function (el) { el.classList.add('revealed'); });
-    return;
-  }
-
-  var revealObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var delay = entry.target.dataset.delay || entry.target.dataset.d || '0';
-        entry.target.style.transitionDelay = delay + 'ms';
-        entry.target.classList.add('revealed');
-        revealObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  candidates.forEach(function (el) {
-    // Don't double-register elements already observed by a global handler
-    if (!el.dataset.revealRegistered) {
-      el.dataset.revealRegistered = '1';
-      revealObs.observe(el);
-    }
-  });
-
-  window.__revealObserverActive = true;
-})();
 
   // ── Seções 5-8: Ativações + Performance + Pressão + Pessoas
 /* ── Section 7: pressure items sequential reveal ── */
