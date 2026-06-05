@@ -1888,150 +1888,143 @@
   .ppl-box { padding: 36px 28px; }
 }
 
-/* ============================================================
-   SECTION 9 — A EXPERIÊNCIA CATERHAM
-   ============================================================ */
+
+/* === SEÇÃO 9: CATERHAM EXP CINEMATIC === */
 
 #sec-caterham-exp {
+  position: relative;
+  height: 1430vh;
   background: var(--ink);
-  padding: 120px 0;
+}
+.cte-lock {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
   overflow: hidden;
-}
-
-.cte-header {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto 64px;
-}
-
-.cte-headline {
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  text-transform: uppercase;
-  color: var(--paper);
-  margin: 16px 0 24px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  background: var(--ink);
 }
 
 .cte-intro {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--paper-60);
-  max-width: 620px;
-  margin: 0 auto;
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 0 40px;
+  will-change: opacity;
 }
-
-/* Mosaic grid — full bleed (no .wrap) */
-.cte-mosaic {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 
-    360px  /* row 1 */
-    360px  /* row 2 */
-    280px  /* row 3 */
-    40vh;  /* row 4 */
-  gap: 8px;
-  margin-bottom: 80px;
-}
-
-.cte-cell {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  background: var(--ink-1);
-}
-
-.cte-cell img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 600ms cubic-bezier(.25,.46,.45,.94),
-              filter 600ms cubic-bezier(.25,.46,.45,.94);
-  will-change: transform;
-}
-
-.cte-cell:hover img {
-  transform: scale(1.035);
-  filter: brightness(1.08);
-}
-
-/* Row 1 */
-.cte-r1-a { grid-column: 1 / 3; grid-row: 1; }
-.cte-r1-b { grid-column: 3;     grid-row: 1; }
-.cte-r1-c { grid-column: 4;     grid-row: 1; }
-
-/* Row 2 */
-.cte-r2-a { grid-column: 1;     grid-row: 2; }
-.cte-r2-b { grid-column: 2;     grid-row: 2; }
-.cte-r2-c { grid-column: 3 / 5; grid-row: 2; }
-
-/* Row 3 */
-.cte-r3-a { grid-column: 1;     grid-row: 3; }
-.cte-r3-b { grid-column: 2 / 4; grid-row: 3; }
-.cte-r3-c { grid-column: 4;     grid-row: 3; }
-
-/* Row 4 */
-.cte-r4-a { grid-column: 1 / 3; grid-row: 4; }
-.cte-r4-b { grid-column: 3 / 5; grid-row: 4; }
-
-/* Caption with lime dot */
-.cte-cap {
-  position: absolute;
-  bottom: 12px;
-  left: 14px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
+.cte-intro-kicker {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--paper);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 300ms ease, transform 300ms ease;
-  pointer-events: none;
-  z-index: 2;
+  font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+  color: var(--lime); margin-bottom: 40px;
+  display: flex; align-items: center; gap: 16px;
 }
-
-.cte-cell:hover .cte-cap {
-  opacity: 1;
-  transform: translateY(0);
+.cte-intro-kicker::before, .cte-intro-kicker::after {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--lime);
 }
-
-.cte-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--lime);
-  flex-shrink: 0;
+.cte-intro-h {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(48px, 7vw, 108px);
+  line-height: .9; letter-spacing: -.02em;
+  color: var(--paper); margin-bottom: 28px;
 }
-
-/* Bottom overlay fade on each cell */
-.cte-cell::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(1,12,14,.55) 0%, transparent 45%);
-  pointer-events: none;
+.cte-intro-h em { color: var(--lime); font-style: italic; }
+.cte-intro-sub {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 600; text-transform: uppercase;
+  font-size: clamp(18px, 2.2vw, 30px);
+  color: var(--paper-60); letter-spacing: .02em; margin-bottom: 56px;
 }
-
-/* Body copy */
-.cte-body-copy {
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  line-height: 1.8;
+.cte-intro-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
   color: var(--paper-40);
-  max-width: 680px;
-  margin: 0 auto;
+  animation: cte-pulse 2s ease-in-out infinite;
 }
+@keyframes cte-pulse {
+  0%,100% { opacity: .4; transform: translateY(0); }
+  50%      { opacity: 1;  transform: translateY(6px); }
+}
+
+.cte-layer {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 44px;
+}
+.cte-layer:nth-child(2)  { z-index: 10; }
+.cte-layer:nth-child(3)  { z-index: 20; }
+.cte-layer:nth-child(4)  { z-index: 30; }
+.cte-layer:nth-child(5)  { z-index: 40; }
+.cte-layer:nth-child(6)  { z-index: 50; }
+.cte-layer:nth-child(7)  { z-index: 60; }
+.cte-layer:nth-child(8)  { z-index: 70; }
+.cte-layer:nth-child(9)  { z-index: 80; }
+.cte-layer:nth-child(10) { z-index: 90; }
+.cte-layer:nth-child(11) { z-index: 100; }
+.cte-layer:nth-child(12) { z-index: 110; }
+
+.cte-card {
+  width: 100%; height: 100%;
+  border-radius: 24px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
+  position: relative;
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+.cte-card img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.cte-card-veil {
+  position: absolute; inset: 0; pointer-events: none; border-radius: 24px;
+  background: linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.28) 40%, rgba(0,0,0,.05) 100%);
+}
+
+.cte-text-overlay {
+  position: absolute; inset: 0;
+  z-index: 200; pointer-events: none;
+}
+.cte-text-item {
+  position: absolute; bottom: 88px; left: 96px;
+  opacity: 0; will-change: opacity, transform; max-width: 520px;
+}
+.cte-chapter-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .28em; color: var(--lime);
+  opacity: .85; display: block; margin-bottom: 10px;
+}
+.cte-chapter-title {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: .92; letter-spacing: -.02em; color: var(--paper); margin-bottom: 14px;
+  text-shadow: 0 2px 20px rgba(0,0,0,.6);
+}
+.cte-chapter-sub {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: clamp(14px, 1.2vw, 17px); line-height: 1.6;
+  color: rgba(251,251,252,.82);
+  text-shadow: 0 1px 10px rgba(0,0,0,.8);
+}
+.cte-chapter-line { width: 36px; height: 2px; background: var(--lime); margin-top: 18px; }
+
+.cte-counter {
+  position: absolute; top: 32px; right: 56px;
+  z-index: 201;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .16em; color: var(--paper-40);
+  pointer-events: none;
+}
+.cte-counter span { color: var(--lime); font-weight: 500; }
+
+@media (max-width: 768px) {
+  #sec-caterham-exp { height: 1200vh; }
+  .cte-layer { padding: 14px 18px; }
+  .cte-card { border-radius: 16px; }
+  .cte-text-item { bottom: 52px; left: 30px; right: 30px; max-width: 100%; }
+  .cte-chapter-title { font-size: 36px; }
+  .cte-counter { top: 18px; right: 24px; }
+}
+
 
 /* ============================================================
    SECTION 10 — O QUE É O CATERHAM SEVEN
@@ -3466,78 +3459,155 @@
      SECTION 9: A EXPERIÊNCIA CATERHAM
      ============================================================ -->
 <section id="sec-caterham-exp">
-  <div class="wrap">
-    <div class="cte-header" data-r>
-      <span class="label">A Experiência</span>
-      <h2 class="cte-headline">A Experiência Caterham</h2>
-      <p class="cte-intro">
-        Os Caterham Seven representam um dos momentos mais aguardados da programação.
-        Conhecidos pela construção leve, resposta rápida e conexão direta entre piloto e máquina,
-        eles traduzem na prática os conceitos presentes em toda a jornada.
-      </p>
+  <div class="cte-lock" id="cteLock">
+
+    <div class="cte-intro" id="cteIntro">
+      <div class="cte-intro-kicker">A Experiência Caterham</div>
+      <h2 class="cte-intro-h">NÃO É UM<br><em>TEST DRIVE.</em></h2>
+      <p class="cte-intro-sub">É um laboratório de performance.</p>
+      <div class="cte-intro-hint">&#8595; &nbsp; Role para viver a experiência &nbsp; &#8595;</div>
     </div>
-  </div>
 
-  <div class="cte-mosaic" data-r class="d1">
-    <!-- Row 1 -->
-    <figure class="cte-cell cte-r1-a">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1219.jpg" alt="Caterham Race Experience 01" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Preparação</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r1-b">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1302.jpg" alt="Caterham Race Experience 02" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Alinhamento</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r1-c">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1377.jpg" alt="Caterham Race Experience 03" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Foco</figcaption>
-    </figure>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="0">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1219.jpg" alt="BRIEFING" loading="eager">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="1">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1302.jpg" alt="PREPARACAO" loading="eager">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="2">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1377.jpg" alt="PRIMEIRO CONTATO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="3">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1640.jpg" alt="REACAO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="4">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1672.jpg" alt="PRECISAO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="5">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1844.jpg" alt="PERFORMANCE" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="6">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1964.jpg" alt="COMPETICAO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="7">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2032.jpg" alt="VITORIA" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="8">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2046.jpg" alt="TRANSFORMACAO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="9">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2352.jpg" alt="A PISTA" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
+    <div class="cte-layer">
+      <div class="cte-card" data-cte="10">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3227.jpg" alt="O LEGADO" loading="lazy">
+        <div class="cte-card-veil"></div>
+      </div>
+    </div>
 
-    <!-- Row 2 -->
-    <figure class="cte-cell cte-r2-a">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1640.jpg" alt="Caterham Race Experience 04" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Precisão</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r2-b">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1672.jpg" alt="Caterham Race Experience 05" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Reação</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r2-c">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1844.jpg" alt="Caterham Race Experience 06" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Execução</figcaption>
-    </figure>
+    <div class="cte-text-overlay" id="cteTextOverlay">
+      <div class="cte-text-item" data-cte-text="0">
+        <span class="cte-chapter-num">01</span>
+        <h3 class="cte-chapter-title">BRIEFING</h3>
+        <p class="cte-chapter-sub">A jornada comeca antes da pista.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="1">
+        <span class="cte-chapter-num">02</span>
+        <h3 class="cte-chapter-title">PREPARACAO</h3>
+        <p class="cte-chapter-sub">Entender o desafio antes de acelerar.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="2">
+        <span class="cte-chapter-num">03</span>
+        <h3 class="cte-chapter-title">PRIMEIRO CONTATO</h3>
+        <p class="cte-chapter-sub">Piloto e maquina comecam a conversar.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="3">
+        <span class="cte-chapter-num">04</span>
+        <h3 class="cte-chapter-title">REACAO</h3>
+        <p class="cte-chapter-sub">Cada curva devolve uma resposta imediata.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="4">
+        <span class="cte-chapter-num">05</span>
+        <h3 class="cte-chapter-title">PRECISAO</h3>
+        <p class="cte-chapter-sub">Pequenas decisoes geram grandes resultados.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="5">
+        <span class="cte-chapter-num">06</span>
+        <h3 class="cte-chapter-title">PERFORMANCE</h3>
+        <p class="cte-chapter-sub">A velocidade revela comportamentos.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="6">
+        <span class="cte-chapter-num">07</span>
+        <h3 class="cte-chapter-title">COMPETICAO</h3>
+        <p class="cte-chapter-sub">Sob pressao, equipes mostram sua essencia.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="7">
+        <span class="cte-chapter-num">08</span>
+        <h3 class="cte-chapter-title">VITORIA</h3>
+        <p class="cte-chapter-sub">Resultado e consequencia da execucao.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="8">
+        <span class="cte-chapter-num">09</span>
+        <h3 class="cte-chapter-title">TRANSFORMACAO</h3>
+        <p class="cte-chapter-sub">Voce sai diferente de como entrou.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="9">
+        <span class="cte-chapter-num">10</span>
+        <h3 class="cte-chapter-title">A PISTA</h3>
+        <p class="cte-chapter-sub">O palco onde tudo acontece.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+      <div class="cte-text-item" data-cte-text="10">
+        <span class="cte-chapter-num">11</span>
+        <h3 class="cte-chapter-title">O LEGADO</h3>
+        <p class="cte-chapter-sub">O que fica depois da bandeirada.</p>
+        <div class="cte-chapter-line"></div>
+      </div>
+    </div>
 
-    <!-- Row 3 -->
-    <figure class="cte-cell cte-r3-a">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1964.jpg" alt="Caterham Race Experience 07" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Velocidade</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r3-b">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2032.jpg" alt="Caterham Race Experience 08" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Controle</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r3-c">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2046.jpg" alt="Caterham Race Experience 09" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Adrenalina</figcaption>
-    </figure>
+    <div class="cte-counter" id="cteCounter">
+      <span id="cteIdx">01</span> / 11
+    </div>
 
-    <!-- Row 4 – full width panoramic -->
-    <figure class="cte-cell cte-r4-a">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2352.jpg" alt="Caterham Race Experience 10" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Na pista</figcaption>
-    </figure>
-    <figure class="cte-cell cte-r4-b">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3227.jpg" alt="Caterham Race Experience 11" loading="lazy">
-      <figcaption class="cte-cap"><span class="cte-dot"></span>Intensidade</figcaption>
-    </figure>
-  </div>
-
-  <div class="wrap">
-    <p class="cte-body-copy" data-r>
-      <em>Preparação. Precisão. Execução. Capacidade de reação.<br>
-      Mais do que velocidade, a experiência reforça a importância de estar presente,
-      atento, preparado para responder aos desafios que surgem ao longo do caminho.</em>
-    </p>
   </div>
 </section>
 
