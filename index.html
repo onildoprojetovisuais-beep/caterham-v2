@@ -1005,34 +1005,32 @@
   background: var(--ink);
   width: 100%;
   overflow: hidden;
+  padding: 80px 0;
 }
 
 .scroll-story-inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: 55vw 1fr;
   align-items: flex-start;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 56px;
+  min-height: 100vh;
 }
 
 /* LEFT: sticky image panel */
 .scroll-story-media {
   width: 55%;
-  flex-shrink: 0;
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 48px 40px 0;
+  overflow: hidden;
 }
 
 .scroll-story-img-wrap {
   position: relative;
   width: 100%;
-  height: 75vh;
-  border-radius: 6px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -1053,8 +1051,8 @@
 
 /* RIGHT: scrollable text blocks */
 .scroll-story-texts {
-  width: 45%;
-  flex-shrink: 0;
+  padding: 0 56px 0 52px;
+  max-width: 560px;
 }
 
 .scroll-story-block {
@@ -1111,7 +1109,7 @@
 /* MOBILE */
 @media (max-width: 768px) {
   .scroll-story-inner {
-    flex-direction: column;
+    display: block;
     padding: 0 22px;
   }
 
@@ -1369,6 +1367,9 @@
   grid-template-columns: 1.25fr 1fr;
   gap: 12px;
   align-items: stretch;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 56px;
 }
 
 .atv-sub-grid {
@@ -2915,7 +2916,7 @@
     <img src="Brand/IMAGENS PAGINA/LOGO WHITE.png" alt="Scuderia Bandeiras × Caterham Motorsport Brasil">
   </div>
   <div class="topbar-r">
-    <span class="topbar-meta">EDIÇÃO <span>03</span> · 28.05.2026</span>
+    <span class="topbar-meta">RACE EXPERIENCE · <span>SCUDERIA BANDEIRAS</span></span>
     <a href="https://wa.me/5515998570854" class="btn btn-lime" target="_blank" rel="noopener">
       <span class="flag"></span>Garantir vaga
     </a>
@@ -2953,7 +2954,7 @@
 
   <div class="hero-grid">
     <div>
-      <div class="hero-num" data-r>RACE EXPERIENCE / EDIÇÃO 2026</div>
+      <div class="hero-num" data-r>RACE EXPERIENCE · SCUDERIA BANDEIRAS × CATERHAM</div>
       <h1 class="hero-h1" data-r="up">
         Sua equipe<br>
         <span class="lime">acelera</span> em uma<br>
@@ -2969,11 +2970,11 @@
         <a href="https://wa.me/5515998570854" class="btn btn-lime" target="_blank" rel="noopener">
           <span class="flag"></span>Quero viver essa experiência
         </a>
-        <span class="small">PRÓXIMA EDIÇÃO · 28 MAI · VAGAS LIMITADAS</span>
+        <span class="small">VAGAS LIMITADAS · CONSULTE DISPONIBILIDADE</span>
       </div>
     </div>
 
-    <aside class="hero-card d3" data-r="right">
+    <aside class="hero-card d3" data-r="right" style="display:none">
       <div class="lbl">Próxima edição</div>
       <div class="day">28</div>
       <div class="month">Maio</div>
@@ -3259,10 +3260,10 @@
     <p class="atv-intro">As experiências foram criadas para aproximar os participantes da dinâmica presente nas equipes de corrida, transformando conceitos em vivências práticas.</p>
   </div>
 
-  <div class="wrap atv-grid-wrap">
+  <div class="atv-grid-wrap">
     <!-- Featured card (Volta Rápida) -->
     <div class="atv-card atv-featured" data-r="up" data-index="05">
-      <img src="Brand/Imagem/seção-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
       <div class="atv-overlay"></div>
       <span class="atv-num mono">05</span>
       <div class="atv-info">
@@ -3274,7 +3275,7 @@
     <!-- Right 2×2 grid -->
     <div class="atv-sub-grid">
       <div class="atv-card d1" data-r="up" data-index="01">
-        <img src="Brand/Imagem/seção-5/reflexos rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/reflexos%20rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">01</span>
         <div class="atv-info">
@@ -3284,7 +3285,7 @@
       </div>
 
       <div class="atv-card d2" data-r="up" data-index="02">
-        <img src="Brand/Imagem/seção-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">02</span>
         <div class="atv-info">
@@ -3294,7 +3295,7 @@
       </div>
 
       <div class="atv-card d3" data-r="up" data-index="03">
-        <img src="Brand/Imagem/seção-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">03</span>
         <div class="atv-info">
@@ -3304,7 +3305,7 @@
       </div>
 
       <div class="atv-card d4" data-r="up" data-index="04">
-        <img src="Brand/Imagem/seção-5/pit-stop-challenge.jpg" alt="Pit Stop Challenge" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/pit-stop-challenge.jpg" alt="Pit Stop Challenge" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">04</span>
         <div class="atv-info">
@@ -3319,7 +3320,7 @@
   <div class="atv-scroll-wrap">
     <div class="atv-scroll-track">
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/seção-5/reflexos rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/reflexos%20rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">01</span>
         <div class="atv-info">
@@ -3328,7 +3329,7 @@
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/seção-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">02</span>
         <div class="atv-info">
@@ -3337,7 +3338,7 @@
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/seção-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">03</span>
         <div class="atv-info">
@@ -3346,7 +3347,7 @@
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/seção-5/pit-stop-challenge.jpg" alt="Pit Stop Challenge" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/pit-stop-challenge.jpg" alt="Pit Stop Challenge" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">04</span>
         <div class="atv-info">
@@ -3355,7 +3356,7 @@
         </div>
       </div>
       <div class="atv-card atv-scroll-card atv-featured-mobile">
-        <img src="Brand/Imagem/seção-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">05</span>
         <div class="atv-info">
@@ -3424,7 +3425,7 @@
 ════════════════════════════════════════════════════════ -->
 <section id="sec-pressure">
   <div class="pressure-bg">
-    <img src="Brand/Imagem/seção-7/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2731.jpg" alt="Quando a Pressão é Real" loading="lazy">
+    <img src="Brand/Imagem/se%C3%A7%C3%A3o-7/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2731.jpg" alt="Quando a Pressão é Real" loading="lazy">
   </div>
   <div class="pressure-veil"></div>
   <div class="pressure-content">
@@ -3518,53 +3519,53 @@
   <div class="cte-mosaic" data-r class="d1">
     <!-- Row 1 -->
     <figure class="cte-cell cte-r1-a">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1219.jpg" alt="Caterham Race Experience 01" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1219.jpg" alt="Caterham Race Experience 01" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Preparação</figcaption>
     </figure>
     <figure class="cte-cell cte-r1-b">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1302.jpg" alt="Caterham Race Experience 02" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1302.jpg" alt="Caterham Race Experience 02" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Alinhamento</figcaption>
     </figure>
     <figure class="cte-cell cte-r1-c">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1377.jpg" alt="Caterham Race Experience 03" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1377.jpg" alt="Caterham Race Experience 03" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Foco</figcaption>
     </figure>
 
     <!-- Row 2 -->
     <figure class="cte-cell cte-r2-a">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1640.jpg" alt="Caterham Race Experience 04" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1640.jpg" alt="Caterham Race Experience 04" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Precisão</figcaption>
     </figure>
     <figure class="cte-cell cte-r2-b">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1672.jpg" alt="Caterham Race Experience 05" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1672.jpg" alt="Caterham Race Experience 05" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Reação</figcaption>
     </figure>
     <figure class="cte-cell cte-r2-c">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1844.jpg" alt="Caterham Race Experience 06" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1844.jpg" alt="Caterham Race Experience 06" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Execução</figcaption>
     </figure>
 
     <!-- Row 3 -->
     <figure class="cte-cell cte-r3-a">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1964.jpg" alt="Caterham Race Experience 07" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-1964.jpg" alt="Caterham Race Experience 07" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Velocidade</figcaption>
     </figure>
     <figure class="cte-cell cte-r3-b">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2032.jpg" alt="Caterham Race Experience 08" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2032.jpg" alt="Caterham Race Experience 08" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Controle</figcaption>
     </figure>
     <figure class="cte-cell cte-r3-c">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2046.jpg" alt="Caterham Race Experience 09" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2046.jpg" alt="Caterham Race Experience 09" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Adrenalina</figcaption>
     </figure>
 
     <!-- Row 4 – full width panoramic -->
     <figure class="cte-cell cte-r4-a">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2352.jpg" alt="Caterham Race Experience 10" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2352.jpg" alt="Caterham Race Experience 10" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Na pista</figcaption>
     </figure>
     <figure class="cte-cell cte-r4-b">
-      <img src="Brand/Imagem/seção-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3227.jpg" alt="Caterham Race Experience 11" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-9/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-3227.jpg" alt="Caterham Race Experience 11" loading="lazy">
       <figcaption class="cte-cap"><span class="cte-dot"></span>Intensidade</figcaption>
     </figure>
   </div>
@@ -3644,7 +3645,7 @@
       <!-- Átila Abreu -->
       <article class="plt-new-card">
         <div class="plt-new-photo-wrap">
-          <img src="Brand/Imagem/seção-11/atila-abreu.jpg" alt="Átila Abreu" loading="lazy">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/atila-abreu.jpg" alt="Átila Abreu" loading="lazy">
         </div>
         <div class="plt-new-overlay">
           <span class="plt-new-name">Átila Abreu</span>
@@ -3654,7 +3655,7 @@
       <!-- Christian Fittipaldi -->
       <article class="plt-new-card">
         <div class="plt-new-photo-wrap">
-          <img src="Brand/Imagem/seção-11/cristian-fitipaldi.jpg" alt="Christian Fittipaldi" loading="lazy">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/cristian-fitipaldi.jpg" alt="Christian Fittipaldi" loading="lazy">
         </div>
         <div class="plt-new-overlay">
           <span class="plt-new-name">Christian Fittipaldi</span>
@@ -3664,7 +3665,7 @@
       <!-- Ingo Hoffmann -->
       <article class="plt-new-card">
         <div class="plt-new-photo-wrap">
-          <img src="Brand/Imagem/seção-11/ingohoffman.jpg" alt="Ingo Hoffmann" loading="lazy">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/ingohoffman.jpg" alt="Ingo Hoffmann" loading="lazy">
         </div>
         <div class="plt-new-overlay">
           <span class="plt-new-name">Ingo Hoffmann</span>
@@ -3674,7 +3675,7 @@
       <!-- Nelson Piquet Jr. -->
       <article class="plt-new-card">
         <div class="plt-new-photo-wrap">
-          <img src="Brand/Imagem/seção-11/nelsinho-piquet.jpg" alt="Nelson Piquet Jr." loading="lazy">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/nelsinho-piquet.jpg" alt="Nelson Piquet Jr." loading="lazy">
         </div>
         <div class="plt-new-overlay">
           <span class="plt-new-name">Nelson Piquet Jr.</span>
@@ -3684,7 +3685,7 @@
       <!-- Rafael Suzuki -->
       <article class="plt-new-card">
         <div class="plt-new-photo-wrap">
-          <img src="Brand/Imagem/seção-11/rafael-suzuki.jpg" alt="Rafael Suzuki" loading="lazy">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/rafael-suzuki.jpg" alt="Rafael Suzuki" loading="lazy">
         </div>
         <div class="plt-new-overlay">
           <span class="plt-new-name">Rafael Suzuki</span>
@@ -3844,7 +3845,7 @@
       <img src="Brand/IMAGENS PAGINA/LOGO WHITE.png" alt="Scuderia Bandeiras">
     </div>
     <div class="foot-c">
-      RACE EXPERIENCE · EDIÇÃO <span>03</span> · 2026
+      RACE EXPERIENCE · SCUDERIA BANDEIRAS × CATERHAM
     </div>
     <div class="foot-r">
       <a href="https://wa.me/5515998570854" target="_blank" rel="noopener">
