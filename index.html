@@ -1823,88 +1823,71 @@
 
 /* ════════════════════════════════════════════════════════
    §8  UM AMBIENTE QUE APROXIMA PESSOAS
-════════════════════════════════════════════════════════ */
+════════════════════════════════════════════════════════ *
 #sec-people {
-  background:
-    radial-gradient(70% 60% at 30% 50%, rgba(1,79,72,.30) 0%, transparent 65%),
-    radial-gradient(50% 50% at 80% 30%, rgba(202,211,2,.05) 0%, transparent 60%),
-    var(--emerald-d);
-  padding: 160px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ═══ SEÇÃO 8: PESSOAS — EDITORIAL ═══ */
-
-#sec-people {
-  position: relative;
-  padding: 160px 0;
   background: var(--emerald-d);
   overflow: hidden;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-
-.ppl-bg-img {
+.ppl-img-col {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+.ppl-img-col img {
   position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+}
+.ppl-img-col::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 60%, var(--emerald-d) 100%);
   pointer-events: none;
 }
-.ppl-bg-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: .08;
-  filter: saturate(0) brightness(.8);
+.ppl-text-col {
+  display: flex; align-items: center; justify-content: center;
+  padding: 80px 56px; position: relative; z-index: 2;
 }
-
-.ppl-overlay {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(60% 60% at 70% 50%, rgba(202,211,2,.04) 0%, transparent 70%),
-    radial-gradient(50% 70% at 10% 90%, rgba(1,79,72,.4) 0%, transparent 60%);
+.ppl-box {
+  border: 1px solid rgba(202,211,2,.55);
+  box-shadow: 0 0 0 1px rgba(202,211,2,.08), 0 0 32px rgba(202,211,2,.12), inset 0 0 40px rgba(202,211,2,.03);
+  padding: 56px 48px;
+  background: rgba(2,31,24,.65);
+  backdrop-filter: blur(6px);
+  position: relative;
 }
-
-.ppl-inner {
-  position: relative; z-index: 2;
-  max-width: 960px !important;
+.ppl-box::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 48px; height: 3px; background: var(--lime);
 }
-
-.ppl-kicker {
-  display: flex; align-items: center; gap: 20px;
-  margin-bottom: 56px;
-}
-.ppl-rule {
-  flex: 1; height: 1px; background: var(--paper-18);
-}
-.ppl-kicker .label::before { display: none; }
+.ppl-kicker { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.ppl-kicker-line { flex: 1; height: 1px; background: rgba(202,211,2,.25); }
 .ppl-kicker .label { padding: 0; }
-
+.ppl-kicker .label::before { display: none; }
 .ppl-headline {
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   font-weight: 700; text-transform: uppercase;
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(32px, 3.2vw, 52px);
   line-height: .95; letter-spacing: -.015em;
-  color: var(--paper); margin-bottom: 48px;
+  color: var(--paper); margin-bottom: 36px;
 }
 .ppl-headline em { color: var(--lime); font-style: italic; }
-
-.ppl-body-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
-  padding-top: 40px; border-top: 1px solid var(--paper-08);
-}
-@media (max-width: 768px) {
-  .ppl-body-wrap { grid-template-columns: 1fr; gap: 20px; }
-}
-
+.ppl-divider { height: 1px; background: rgba(251,251,252,.10); margin-bottom: 32px; }
 .ppl-body {
   font-family: 'Inter', sans-serif; font-weight: 300;
-  font-size: 16px; line-height: 1.8; color: var(--paper-60);
+  font-size: 15px; line-height: 1.8; color: var(--paper-60);
+}
+.ppl-body + .ppl-body { margin-top: 18px; }
+@media (max-width: 960px) {
+  #sec-people { grid-template-columns: 1fr; }
+  .ppl-img-col { min-height: 55vw; }
+  .ppl-img-col::after { background: linear-gradient(180deg, transparent 50%, var(--emerald-d) 100%); }
+  .ppl-text-col { padding: 48px 24px; }
+  .ppl-box { padding: 36px 28px; }
 }
 
-.ppl-rule-bottom {
-  height: 1px; background: var(--paper-08);
-  margin-top: 64px;
-}
-
-
-    /* ═══ SEÇÃO 9-11: CATERHAM EXP + SPECS + PILOTOS ═══ */
 /* ============================================================
    SECTION 9 — A EXPERIÊNCIA CATERHAM
    ============================================================ */
@@ -3418,31 +3401,21 @@
      §8  UM AMBIENTE QUE APROXIMA PESSOAS
 ════════════════════════════════════════════════════════ -->
 <section id="sec-people">
-  <div class="ppl-bg-img">
-    <img src="Brand/Imagem/se%C3%A7%C3%A3o-7/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2731.jpg" alt="" aria-hidden="true" loading="lazy">
+  <div class="ppl-img-col" data-r="left">
+    <img src="Brand/Imagem/se%C3%A7%C3%A3o-4/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0740.jpg" alt="Race Experience — pessoas" loading="lazy">
   </div>
-  <div class="ppl-overlay"></div>
-  <div class="wrap ppl-inner">
-    <div class="ppl-kicker" data-r>
-      <div class="ppl-rule"></div>
-      <span class="label">Conexões reais</span>
-      <div class="ppl-rule"></div>
+  <div class="ppl-text-col">
+    <div class="ppl-box" data-r="right">
+      <div class="ppl-kicker">
+        <div class="ppl-kicker-line"></div>
+        <span class="label">Conexões Reais</span>
+        <div class="ppl-kicker-line"></div>
+      </div>
+      <h2 class="ppl-headline">Um ambiente onde<br>experiências são trocadas<br><em>naturalmente.</em></h2>
+      <div class="ppl-divider"></div>
+      <p class="ppl-body">As conversas surgem a partir dos desafios vividos durante o dia, das experiências profissionais de cada participante e dos temas que conectam pessoas que convivem diariamente com responsabilidade, colaboração, tomada de decisão e busca por resultados.</p>
+      <p class="ppl-body">Sem roteiros prontos. Sem interações forçadas. Apenas contexto, desafio e conexão real.</p>
     </div>
-    <h2 class="ppl-headline" data-r="up">
-      Um ambiente onde<br>experiências são<br>trocadas <em>naturalmente.</em>
-    </h2>
-    <div class="ppl-body-wrap" data-r="up">
-      <p class="ppl-body">
-        As conversas surgem a partir dos desafios vividos durante o dia, das experiências
-        profissionais de cada participante e dos temas que conectam pessoas que convivem
-        diariamente com responsabilidade, colaboração, tomada de decisão e busca por resultados.
-      </p>
-      <p class="ppl-body">
-        Sem roteiros prontos. Sem interações forçadas.
-        Apenas contexto, desafio e conexão real.
-      </p>
-    </div>
-    <div class="ppl-rule-bottom" data-r></div>
   </div>
 </section>
 
