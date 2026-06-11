@@ -4205,13 +4205,19 @@
      ============================================================ -->
 <style>
   #sec-panel { background: var(--emerald-d); padding: 120px 0; }
-  .panel-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px; }
+  .panel-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-top: 56px; }
+  .panel-photo { border-radius: 4px; overflow: hidden; }
+  .panel-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: brightness(.88) saturate(.9); }
+  .panel-right { display: flex; flex-direction: column; gap: 36px; }
   .panel-body { font-size: clamp(16px,1.5vw,20px); line-height: 1.75; color: rgba(255,255,255,.85); }
   .panel-body + .panel-body { margin-top: 20px; font-size: clamp(15px,1.3vw,17px); color: rgba(255,255,255,.7); }
   .panel-names { display: flex; flex-direction: column; gap: 1px; }
   .panel-name-row { padding: 18px 0; border-bottom: 1px solid rgba(202,211,2,.15); font-family: 'IBM Plex Sans Condensed', sans-serif; font-size: clamp(16px,1.6vw,20px); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--paper); }
   .panel-name-row:last-child { border-bottom: none; }
-  @media (max-width: 768px) { .panel-inner { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 768px) {
+    .panel-inner { grid-template-columns: 1fr; gap: 40px; }
+    .panel-photo img { aspect-ratio: 16/10; }
+  }
 </style>
 <section id="sec-panel">
   <div class="wrap">
@@ -4220,16 +4226,21 @@
       <h2 style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--paper);margin:8px 0 0;line-height:1">ALÉM<br><em style="color:var(--lime);font-style:italic">DA PISTA</em></h2>
     </div>
     <div class="panel-inner" data-r="up">
-      <div>
-        <p class="panel-body">Os pilotos não são apenas convidados. Eles são parte da programação — e essa distinção muda completamente o que os participantes vivem no dia.</p>
-        <p class="panel-body">Átila Abreu, Rubens Barrichello, Nelson Piquet Jr. e Rafael Suzuki participam de um painel de troca real com os participantes. Histórias de carreiras construídas sob pressão extrema, decisões tomadas em frações de segundo — em conversa direta com quem está na plateia.</p>
-        <p class="panel-body">Não é palestra. É conversa direta — dois mundos que enfrentam os mesmos desafios com linguagens diferentes.</p>
+      <div class="panel-photo">
+        <img src="Brand/Imagem/painel/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2669.jpg" alt="Painel com pilotos" loading="lazy">
       </div>
-      <div class="panel-names">
-        <div class="panel-name-row">Átila Abreu</div>
-        <div class="panel-name-row">Rubens Barrichello</div>
-        <div class="panel-name-row">Nelson Piquet Jr.</div>
-        <div class="panel-name-row">Rafael Suzuki</div>
+      <div class="panel-right">
+        <div>
+          <p class="panel-body">Os pilotos não são apenas convidados. Eles são parte da programação — e essa distinção muda completamente o que os participantes vivem no dia.</p>
+          <p class="panel-body">Átila Abreu, Rubens Barrichello, Nelson Piquet Jr. e Rafael Suzuki participam de um painel de troca real com os participantes. Histórias de carreiras construídas sob pressão extrema, decisões tomadas em frações de segundo — em conversa direta com quem está na plateia.</p>
+          <p class="panel-body">Não é palestra. É conversa direta — dois mundos que enfrentam os mesmos desafios com linguagens diferentes.</p>
+        </div>
+        <div class="panel-names">
+          <div class="panel-name-row">Átila Abreu</div>
+          <div class="panel-name-row">Rubens Barrichello</div>
+          <div class="panel-name-row">Nelson Piquet Jr.</div>
+          <div class="panel-name-row">Rafael Suzuki</div>
+        </div>
       </div>
     </div>
   </div>
