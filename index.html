@@ -235,6 +235,10 @@
     @media (max-width:980px){
       .hero-grid { padding:0 22px 60px; gap:40px; }
     }
+    @media (max-width:640px){
+      #hero { min-height: 75vh; padding-top: 80px; }
+      .hero-grid { padding: 0 20px 44px; justify-content: flex-end; }
+    }
 
     .hero-num {
       font-family:'JetBrains Mono', monospace;
@@ -757,6 +761,36 @@
       footer { padding:36px 22px 28px; }
       .foot-in { grid-template-columns:1fr; text-align:center; gap:24px; }
       .foot-r { text-align:center; }
+    }
+
+    /* ── ONDE O FORMATO SE ENCAIXA — 2 colunas ── */
+    .fmt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 680px;
+    }
+    .fmt-img-col {
+      position: relative;
+      overflow: hidden;
+    }
+    .fmt-img-col img {
+      transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+    }
+    .fmt-img-col:hover img { transform: scale(1.04); }
+    .fmt-text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(48px, 7vw, 100px) clamp(40px, 6vw, 88px);
+    }
+    @media (max-width: 900px) {
+      .fmt-grid { grid-template-columns: 1fr; }
+      .fmt-img-col { min-height: 380px; }
+      .fmt-text-col { padding: 56px 32px; }
+    }
+    @media (max-width: 640px) {
+      .fmt-img-col { min-height: 280px; }
+      .fmt-text-col { padding: 44px 24px; }
     }
 
     /* ════════════════════════════════════════════════════════
@@ -1383,11 +1417,21 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(1,12,14,.0) 35%,
-    rgba(1,12,14,.55) 65%,
-    rgba(1,12,14,.9) 100%
+    rgba(1,12,14,0)   50%,
+    rgba(1,12,14,.55) 78%,
+    rgba(1,12,14,.82) 100%
   );
+  transition: background .42s ease;
   pointer-events: none;
+}
+
+.atv-card:hover .atv-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(1,12,14,0)   18%,
+    rgba(1,12,14,.72) 52%,
+    rgba(1,12,14,.96) 100%
+  );
 }
 
 .atv-num {
@@ -1446,7 +1490,15 @@
   font-weight: 300;
   font-size: 13px;
   line-height: 1.55;
-  color: var(--paper-60);
+  color: rgba(255,255,255,.82);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .38s ease, transform .38s ease;
+}
+
+.atv-card:hover .atv-desc {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Featured card — larger name */
@@ -1473,6 +1525,49 @@
 /* ── Mobile scroll (hidden on desktop) ── */
 .atv-scroll-wrap {
   display: none;
+}
+
+/* Setas de navegação do carrossel (mobile only) */
+.atv-scroll-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .atv-scroll-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 0 0;
+  }
+  .atv-nav-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(202,211,2,.35);
+    background: transparent;
+    color: var(--lime);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .22s ease, border-color .22s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .atv-nav-btn:active {
+    background: rgba(202,211,2,.12);
+    border-color: var(--lime);
+  }
+  .atv-nav-dots {
+    display: flex; gap: 6px; align-items: center;
+  }
+  .atv-nav-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(202,211,2,.25);
+    transition: background .22s, transform .22s;
+  }
+  .atv-nav-dot.active {
+    background: var(--lime);
+    transform: scale(1.4);
+  }
 }
 
 @media (max-width: 768px) {
@@ -2007,7 +2102,7 @@
 @media (max-width: 640px) {
   #sec-caterham-exp { height: 290vh; }
   .cte-photo-card {
-    width: clamp(85px, 28vw, 130px);
+    width: clamp(90px, 31vw, 145px);
     aspect-ratio: 2/3;
     border-radius: 6px;
   }
@@ -2302,7 +2397,7 @@
 /* Pilot card grid */
 .plt-new-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 56px;
 }
@@ -2947,9 +3042,9 @@
     <div>
       <div class="hero-num" data-r>RACE EXPERIENCE • SCUDERIA BANDEIRAS</div>
       <h1 class="hero-h1" data-r="up">
-        Onde a pista<br>
-        encontra a <span class="lime">alta</span><br>
-        <span class="out">performance.</span>
+        Dentro do<br>
+        <span class="lime">autódromo.</span><br>
+        <span class="out">A corrida é sua.</span>
       </h1>
       <p class="hero-sub d1" data-r="up">
         Um ambiente criado para desenvolver liderança, fortalecer equipes
@@ -2991,7 +3086,7 @@
 
     <!-- Slide 1 -->
     <div class="exp-car-slide" role="group" aria-label="Slide 1 de 6">
-      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0158.jpg')"></div>
+      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0291.jpg')"></div>
       <div class="exp-car-overlay"></div>
       <div class="exp-car-content wrap">
         <span class="label exp-car-label" data-r>A Experiência</span>
@@ -3002,15 +3097,6 @@
 
     <!-- Slide 2 -->
     <div class="exp-car-slide" role="group" aria-label="Slide 2 de 6">
-      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0291.jpg')"></div>
-      <div class="exp-car-overlay"></div>
-      <div class="exp-car-content wrap">
-        <p class="exp-car-quote">"Um dia de imersão que conecta empresários e executivos em torno da alta performance."</p>
-      </div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="exp-car-slide" role="group" aria-label="Slide 3 de 6">
       <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0319.jpg')"></div>
       <div class="exp-car-overlay"></div>
       <div class="exp-car-content wrap">
@@ -3018,9 +3104,18 @@
       </div>
     </div>
 
+    <!-- Slide 3 -->
+    <div class="exp-car-slide" role="group" aria-label="Slide 3 de 6">
+      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0858.jpg')"></div>
+      <div class="exp-car-overlay"></div>
+      <div class="exp-car-content wrap">
+        <p class="exp-car-quote">"Um ambiente que conecta pessoas e transforma relacionamentos em resultados."</p>
+      </div>
+    </div>
+
     <!-- Slide 4 -->
     <div class="exp-car-slide" role="group" aria-label="Slide 4 de 6">
-      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0331.jpg')"></div>
+      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2547.jpg')"></div>
       <div class="exp-car-overlay"></div>
       <div class="exp-car-content wrap">
         <p class="exp-car-quote">"Confiança e trabalho em equipe como diferencial competitivo."</p>
@@ -3029,7 +3124,7 @@
 
     <!-- Slide 5 -->
     <div class="exp-car-slide" role="group" aria-label="Slide 5 de 6">
-      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0829.jpg')"></div>
+      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2557.jpg')"></div>
       <div class="exp-car-overlay"></div>
       <div class="exp-car-content wrap">
         <p class="exp-car-quote">"Estimulando novas perspectivas e traduzindo a alta performance para situações reais."</p>
@@ -3038,10 +3133,10 @@
 
     <!-- Slide 6 -->
     <div class="exp-car-slide" role="group" aria-label="Slide 6 de 6">
-      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-0858.jpg')"></div>
+      <div class="exp-car-bg" style="background-image:url('Brand/Imagem/se%C3%A7%C3%A3o-2/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2593.jpg')"></div>
       <div class="exp-car-overlay"></div>
       <div class="exp-car-content wrap">
-        <p class="exp-car-quote">"Um ambiente que conecta pessoas e transforma relacionamentos em resultados."</p>
+        <p class="exp-car-quote">"Um dia de imersão que conecta empresários e executivos em torno da alta performance."</p>
       </div>
     </div>
 
@@ -3243,52 +3338,52 @@
 ════════════════════════════════════════════════════════ -->
 <section id="sec-ativacoes">
   <div class="wrap atv-head" data-r="up">
-    <span class="label">Nossas Ativações</span>
-    <h2 class="atv-h2">Experiências que transformam<br>conceitos em vivências</h2>
-    <p class="atv-intro">As experiências foram criadas para aproximar os participantes da dinâmica presente nas equipes de corrida, transformando conceitos em vivências práticas.</p>
+    <span class="label">Experiências</span>
+    <h2 class="atv-h2">Quatro formas<br>de estar na pista</h2>
+    <p class="atv-intro">Race Experience, Fast Lap, Drive Experience ou Dinâmicas de Team Building — você escolhe como o grupo vive o dia no autódromo.</p>
   </div>
 
   <div class="atv-grid-wrap">
-    <!-- Featured card (Volta Rápida) -->
+    <!-- Featured card (Race Experience) -->
     <div class="atv-card atv-featured" data-r="up" data-index="05">
-      <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
+      <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Race Experience" loading="lazy">
       <div class="atv-overlay"></div>
       <span class="atv-num mono">05</span>
       <div class="atv-info">
-        <h3 class="atv-name">Volta Rápida Caterham</h3>
-        <p class="atv-desc">A oportunidade de vivenciar um dos momentos mais marcantes da programação.</p>
+        <h3 class="atv-name">Race Experience</h3>
+        <p class="atv-desc">Uma corrida real, com pilotos profissionais competindo de verdade. Você embarca como passageiro — e sente cada ultrapassagem, fechada e aceleração no próprio corpo.</p>
       </div>
     </div>
 
     <!-- Right 2×2 grid -->
     <div class="atv-sub-grid">
       <div class="atv-card d1" data-r="up" data-index="01">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/reflexos%20rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/fast-lap.jpg" alt="Fast Lap" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">01</span>
         <div class="atv-info">
-          <h3 class="atv-name">Reflexos Rápidos</h3>
-          <p class="atv-desc">Velocidade de reação e leitura de cenário sob estímulos inesperados.</p>
+          <h3 class="atv-name">Fast Lap</h3>
+          <p class="atv-desc">Uma volta cronometrada com piloto profissional ao volante. Velocidade máxima, frenagem real, curvas na linha — você sente o que separa um piloto de corrida de qualquer outra experiência.</p>
         </div>
       </div>
 
       <div class="atv-card d2" data-r="up" data-index="02">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/drive-experience.jpg" alt="Drive Experience" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">02</span>
         <div class="atv-info">
-          <h3 class="atv-name">Análise de Painel</h3>
-          <p class="atv-desc">Interpretação rápida de dados para tomada de decisões estratégicas.</p>
+          <h3 class="atv-name">Drive Experience</h3>
+          <p class="atv-desc">Você assume o volante. Clínica de pilotagem com instrutor profissional — e depois, uma volta real no autódromo com o Caterham Seven respondendo a cada seu comando.</p>
         </div>
       </div>
 
       <div class="atv-card d3" data-r="up" data-index="03">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Dinâmicas de Team Building" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">03</span>
         <div class="atv-info">
-          <h3 class="atv-name">Crazy Kart</h3>
-          <p class="atv-desc">Coordenação, comunicação e trabalho em equipe em ambiente competitivo.</p>
+          <h3 class="atv-name">Dinâmicas de Team Building</h3>
+          <p class="atv-desc">Ativações inspiradas no automobilismo, ajustadas para o perfil e o momento do seu grupo. Não é treinamento. É experiência — e cada detalhe é construído em função do que você quer criar.</p>
         </div>
       </div>
 
@@ -3308,30 +3403,30 @@
   <div class="atv-scroll-wrap">
     <div class="atv-scroll-track">
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/reflexos%20rapidos.jpg" alt="Reflexos Rápidos" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/fast-lap.jpg" alt="Fast Lap" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">01</span>
         <div class="atv-info">
-          <h3 class="atv-name">Reflexos Rápidos</h3>
-          <p class="atv-desc">Velocidade de reação e leitura de cenário sob estímulos inesperados.</p>
+          <h3 class="atv-name">Fast Lap</h3>
+          <p class="atv-desc">Uma volta cronometrada com piloto profissional ao volante. Velocidade máxima, frenagem real, curvas na linha — você sente o que separa um piloto de corrida de qualquer outra experiência.</p>
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/analise-de-painel.jpg" alt="Análise de Painel" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/drive-experience.jpg" alt="Drive Experience" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">02</span>
         <div class="atv-info">
-          <h3 class="atv-name">Análise de Painel</h3>
-          <p class="atv-desc">Interpretação rápida de dados para tomada de decisões estratégicas.</p>
+          <h3 class="atv-name">Drive Experience</h3>
+          <p class="atv-desc">Você assume o volante. Clínica de pilotagem com instrutor profissional — e depois, uma volta real no autódromo com o Caterham Seven respondendo a cada seu comando.</p>
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Crazy Kart" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/kart-crazy.jpg" alt="Dinâmicas de Team Building" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">03</span>
         <div class="atv-info">
-          <h3 class="atv-name">Crazy Kart</h3>
-          <p class="atv-desc">Coordenação, comunicação e trabalho em equipe em ambiente competitivo.</p>
+          <h3 class="atv-name">Dinâmicas de Team Building</h3>
+          <p class="atv-desc">Ativações inspiradas no automobilismo, ajustadas para o perfil e o momento do seu grupo. Não é treinamento. É experiência — e cada detalhe é construído em função do que você quer criar.</p>
         </div>
       </div>
       <div class="atv-card atv-scroll-card">
@@ -3344,15 +3439,67 @@
         </div>
       </div>
       <div class="atv-card atv-scroll-card atv-featured-mobile">
-        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Volta Rápida Caterham" loading="lazy">
+        <img src="Brand/Imagem/se%C3%A7%C3%A3o-5/volta-rapida-caterham.jpg" alt="Race Experience" loading="lazy">
         <div class="atv-overlay"></div>
         <span class="atv-num mono">05</span>
         <div class="atv-info">
-          <h3 class="atv-name">Volta Rápida Caterham</h3>
-          <p class="atv-desc">A oportunidade de vivenciar um dos momentos mais marcantes da programação.</p>
+          <h3 class="atv-name">Race Experience</h3>
+          <p class="atv-desc">Uma corrida real, com pilotos profissionais competindo de verdade. Você embarca como passageiro — e sente cada ultrapassagem, fechada e aceleração no próprio corpo.</p>
         </div>
       </div>
     </div>
+    <!-- Setas de navegação (mobile) -->
+    <div class="atv-scroll-nav">
+      <button class="atv-nav-btn" id="atvPrev" aria-label="Anterior">&#8592;</button>
+      <div class="atv-nav-dots" id="atvDots"></div>
+      <button class="atv-nav-btn" id="atvNext" aria-label="Próximo">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ONDE O FORMATO SE ENCAIXA
+     ============================================================ -->
+<section id="sec-format-fit" style="background:var(--emerald-d);padding:0;overflow:hidden">
+  <div class="fmt-grid">
+
+    <!-- Imagem -->
+    <div class="fmt-img-col">
+      <img src="Brand/Imagem/aplica%C3%A7%C3%A3o/20260528_scuderiabandeiras_raceexperience_fazendacapuava_dudabairros-2979.jpg"
+           alt="Aplicação da experiência" loading="lazy"
+           style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+
+    <!-- Texto -->
+    <div class="fmt-text-col">
+      <div data-r="up" style="margin-bottom:56px">
+        <span class="label">Aplicação</span>
+        <h2 style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(32px,3.6vw,56px);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--paper);margin:8px 0 0;line-height:1.05">ONDE O FORMATO<br>SE ENCAIXA</h2>
+      </div>
+      <div role="list" data-r="up">
+        <div role="listitem" style="display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid rgba(202,211,2,.12)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.16em;min-width:32px">01</span>
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(16px,1.8vw,26px);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--paper)">Campanhas de Vendas</span>
+        </div>
+        <div role="listitem" style="display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid rgba(202,211,2,.12)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.16em;min-width:32px">02</span>
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(16px,1.8vw,26px);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--paper)">Eventos de Relacionamento</span>
+        </div>
+        <div role="listitem" style="display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid rgba(202,211,2,.12)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.16em;min-width:32px">03</span>
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(16px,1.8vw,26px);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--paper)">Convenções de Vendas</span>
+        </div>
+        <div role="listitem" style="display:flex;align-items:center;gap:24px;padding:20px 0;border-bottom:1px solid rgba(202,211,2,.12)">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.16em;min-width:32px">04</span>
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(16px,1.8vw,26px);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--paper)">Reuniões de Líderes</span>
+        </div>
+        <div role="listitem" style="display:flex;align-items:center;gap:24px;padding:20px 0">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--lime);letter-spacing:.16em;min-width:32px">05</span>
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(16px,1.8vw,26px);font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--paper)">Festas de Fim de Ano</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -3583,51 +3730,385 @@
 </div>
 
 <!-- ============================================================
-     SECTION 10: O QUE É O CATERHAM SEVEN
+     SECTION 10: FICHA TÉCNICA — OS MODELOS
      ============================================================ -->
+<style>
+  #sec-caterham-what { background: var(--ink); padding: 120px 0 100px; }
+  .ft-wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .ft-header { text-align: center; margin-bottom: 72px; }
+  .ft-header-h { font-family: 'IBM Plex Sans Condensed', sans-serif; font-size: clamp(36px,4.5vw,60px); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--paper); margin: 8px 0 0; line-height: 1.05; }
+  .ft-header-h em { color: var(--lime); font-style: italic; }
+  .ft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .ft-card { background: var(--ink-1); border: 1px solid rgba(202,211,2,.14); overflow: hidden; position: relative; }
+  .ft-accent-bar { height: 3px; background: var(--lime); width: 100%; }
+  .ft-car-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; filter: brightness(.92) contrast(1.05); }
+  .ft-car-name { font-family: 'IBM Plex Sans Condensed', sans-serif; font-size: clamp(24px,3vw,40px); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--paper); padding: 20px 28px 12px; }
+  .ft-table { width: 100%; border-collapse: collapse; }
+  .ft-table tr:nth-child(odd)  { background: rgba(202,211,2,.05); }
+  .ft-table tr:nth-child(even) { background: rgba(1,12,14,.5); }
+  .ft-table td { padding: 11px 28px; line-height: 1.4; }
+  .ft-table td:first-child { font-family: 'JetBrains Mono', monospace; color: var(--lime); text-transform: uppercase; letter-spacing: .1em; font-size: 10px; width: 42%; }
+  .ft-table td:last-child { color: var(--paper); font-size: 13px; font-weight: 500; }
+  @media (max-width: 768px) {
+    .ft-grid { grid-template-columns: 1fr; gap: 28px; }
+    .ft-car-name { font-size: 26px; }
+  }
+</style>
 <section id="sec-caterham-what">
-  <div class="cat-what-bg-text" aria-hidden="true">CATERHAM SEVEN</div>
-  <div class="wrap cat-what-inner">
-    <div class="cat-what-left" data-r>
-      <span class="label">O Automóvel</span>
-      <h2 class="cat-what-headline">Uma máquina criada para aproximar piloto e pista.</h2>
-      <div class="cat-what-words" aria-hidden="true">
-        <span>Leveza.</span>
-        <span>Agilidade.</span>
-        <span>Precisão.</span>
-      </div>
-      <p class="cat-what-body">
-        O Caterham Seven se tornou um ícone do automobilismo. Sua proposta permanece
-        a mesma desde a origem: proporcionar uma experiência de condução pura,
-        onde cada comando gera uma resposta imediata. Uma máquina que mostra como
-        técnica, preparação e execução caminham juntas.
-      </p>
+  <div class="ft-wrap">
+
+    <div class="ft-header" data-r>
+      <span class="label">Os Modelos</span>
+      <h2 class="ft-header-h">CATERHAM<br><em>SEVEN</em></h2>
     </div>
-    <div class="cat-what-right" aria-hidden="true">
-      <div class="cat-what-vert-text">CATERHAM SEVEN</div>
+
+    <div class="ft-grid" data-r>
+
+      <!-- SS600 (170) -->
+      <div class="ft-card">
+        <div class="ft-accent-bar"></div>
+        <img class="ft-car-img" src="Brand/Imagem/ficha-tecnica/SS600%20(170).jpg" alt="Caterham SS600 (170)" loading="lazy">
+        <div class="ft-car-name">SS600 (170)</div>
+        <table class="ft-table" role="table" aria-label="Ficha Técnica SS600">
+          <tr><td>Motor</td><td>3 cilindros · 658cc</td></tr>
+          <tr><td>Potência</td><td>84 cv @ 6.500 rpm</td></tr>
+          <tr><td>Torque</td><td>85 lbft @ 4.500 rpm</td></tr>
+          <tr><td>Rot. Máxima</td><td>6.500 rpm</td></tr>
+          <tr><td>Lubrificação</td><td>Wet sump</td></tr>
+        </table>
+      </div>
+
+      <!-- 420R -->
+      <div class="ft-card">
+        <div class="ft-accent-bar"></div>
+        <img class="ft-car-img" src="Brand/Imagem/ficha-tecnica/420R.jpg" alt="Caterham 420R" loading="lazy">
+        <div class="ft-car-name">420R</div>
+        <table class="ft-table" role="table" aria-label="Ficha Técnica 420R">
+          <tr><td>Motor</td><td>4 cilindros · 1999cc</td></tr>
+          <tr><td>Potência</td><td>210 cv @ 7.600 rpm</td></tr>
+          <tr><td>Torque</td><td>150 lbft @ 6.300 rpm</td></tr>
+          <tr><td>Rot. Máxima</td><td>7.600 rpm</td></tr>
+          <tr><td>Lubrificação</td><td>Dry sump</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     O DNA QUE VEM DA PISTA — LEGADO
+     ============================================================ -->
+<style>
+/* ── SEC-LEGACY: imagem + conteúdo lado a lado ── */
+#sec-legacy {
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+/* Parte superior: imagem + conteúdo */
+.leg-main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52% 48%;
+  min-height: 100vh;
+}
+
+/* Coluna da imagem */
+.leg-img-col {
+  position: relative;
+  overflow: hidden;
+}
+.leg-img-col img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: saturate(.88) brightness(.82);
+  transition: transform 12s ease;
+}
+.leg-main:hover .leg-img-col img { transform: scale(1.04); }
+
+/* Vinheta que sangra da foto para o conteúdo */
+.leg-img-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right,  transparent 55%, var(--ink) 100%),
+    linear-gradient(to bottom, transparent 70%, rgba(1,12,14,.7) 100%);
+}
+
+/* Linha decorativa amarela sobreposta à foto */
+.leg-img-accent {
+  position: absolute;
+  bottom: 56px; left: 36px;
+  display: flex; align-items: center; gap: 14px;
+}
+.leg-img-accent-line {
+  width: 40px; height: 2px; background: var(--lime);
+}
+.leg-img-accent-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .2em;
+  color: var(--lime); text-transform: uppercase;
+}
+
+/* Coluna do conteúdo */
+.leg-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(60px, 8vh, 120px) clamp(40px, 5vw, 88px) clamp(60px, 8vh, 120px) clamp(28px, 3vw, 56px);
+}
+
+.leg-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .2em;
+  color: var(--lime); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.leg-kicker::before {
+  content: ''; display: block;
+  width: 28px; height: 2px; background: var(--lime);
+}
+
+.leg-headline {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: clamp(44px, 5.5vw, 80px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--paper);
+  line-height: .96;
+  margin: 0 0 36px;
+}
+.leg-headline em {
+  color: var(--lime);
+  font-style: italic;
+  display: block;
+}
+
+.leg-body {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,.72);
+  max-width: 460px;
+  margin-bottom: 16px;
+}
+
+.leg-divider {
+  width: 100%; height: 1px;
+  background: rgba(202,211,2,.15);
+  margin: 36px 0;
+}
+
+/* Lista de lendas */
+.leg-legends {
+  display: flex; flex-direction: column; gap: 0;
+}
+.leg-legend-item {
+  display: grid;
+  grid-template-columns: 2px 1fr;
+  gap: 0 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: background .2s;
+}
+.leg-legend-item:last-child { border-bottom: none; }
+.leg-legend-bar {
+  width: 2px;
+  background: var(--lime);
+  opacity: .4;
+  transition: opacity .3s;
+  border-radius: 2px;
+}
+.leg-legend-item:hover .leg-legend-bar { opacity: 1; }
+.leg-legend-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .14em;
+  color: var(--lime); text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.leg-legend-desc {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: rgba(255,255,255,.55);
+  line-height: 1.4;
+}
+
+/* ── Carrossel infinito de arquivo histórico ── */
+.leg-carousel {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  padding: 2px 0 0;
+}
+/* Vinhetas laterais fade */
+.leg-carousel::before,
+.leg-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 140px;
+  z-index: 2;
+  pointer-events: none;
+}
+.leg-carousel::before {
+  left: 0;
+  background: linear-gradient(to right, var(--ink) 0%, transparent 100%);
+}
+.leg-carousel::after {
+  right: 0;
+  background: linear-gradient(to left, var(--ink) 0%, transparent 100%);
+}
+
+.leg-track {
+  display: flex;
+  gap: 6px;
+  will-change: transform;
+  animation: legScroll 60s linear infinite;
+}
+.leg-carousel:hover .leg-track { animation-play-state: paused; }
+
+@keyframes legScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.leg-track-img {
+  height: 230px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.65) brightness(.7);
+  transition: filter .45s ease, transform .45s ease;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.leg-track-img:hover {
+  filter: saturate(1.1) brightness(.95);
+  transform: scale(1.03);
+  z-index: 1;
+  position: relative;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .leg-main { grid-template-columns: 1fr; min-height: auto; }
+  .leg-img-col { min-height: 65vw; max-height: 70vh; }
+  .leg-img-veil {
+    background:
+      linear-gradient(to bottom, transparent 55%, var(--ink) 100%);
+  }
+  .leg-content-col { padding: 48px 24px 72px; }
+  .leg-headline { font-size: clamp(38px, 9vw, 56px); }
+  .leg-track-img { height: 160px; }
+  .leg-carousel::before,
+  .leg-carousel::after { width: 60px; }
+}
+</style>
+
+<section id="sec-legacy">
+
+  <!-- Parte superior: imagem lendária + conteúdo -->
+  <div class="leg-main">
+
+  <!-- Imagem lendária -->
+  <div class="leg-img-col">
+    <img
+      src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/imagem-do-legado.png"
+      alt="O legado do automobilismo brasileiro"
+      loading="lazy">
+    <div class="leg-img-veil"></div>
+    <div class="leg-img-accent">
+      <div class="leg-img-accent-line"></div>
+      <span class="leg-img-accent-text">Brasil · Automobilismo · Legado</span>
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="cat-what-stats" data-r class="d1">
-      <div class="cat-what-stat">
-        <span class="cat-what-stat-label">Estrutura</span>
-        <span class="cat-what-stat-value">Chassis tubular</span>
+  <!-- Conteúdo -->
+  <div class="leg-content-col">
+
+    <p class="leg-kicker" data-r>Legado</p>
+
+    <h2 class="leg-headline" data-r="up">
+      O DNA que<br>
+      <em>vem da pista</em>
+    </h2>
+
+    <p class="leg-body" data-r="up">
+      A Scuderia Bandeiras nasce de uma história. O automobilismo brasileiro produziu
+      três campeões mundiais e deixou uma marca permanente no esporte — de Emerson
+      Fittipaldi a Ayrton Senna, de Nelson Piquet à geração que veio depois.
+    </p>
+    <p class="leg-body" data-r="up">
+      O Caterham Seven nasce da Lotus de Colin Chapman — leveza radical, precisão
+      absoluta, resposta direta entre piloto e asfalto. É esse DNA que dá forma a
+      cada detalhe da Race Experience.
+    </p>
+
+    <div class="leg-divider"></div>
+
+    <div class="leg-legends" data-r="up">
+      <div class="leg-legend-item">
+        <div class="leg-legend-bar"></div>
+        <div>
+          <div class="leg-legend-name">Emerson Fittipaldi</div>
+          <div class="leg-legend-desc">Bicampeão mundial de Fórmula 1 — 1972 e 1974</div>
+        </div>
       </div>
-      <div class="cat-what-divider"></div>
-      <div class="cat-what-stat">
-        <span class="cat-what-stat-label">Motorização</span>
-        <span class="cat-what-stat-value">Motor 1.6L</span>
+      <div class="leg-legend-item">
+        <div class="leg-legend-bar"></div>
+        <div>
+          <div class="leg-legend-name">Nelson Piquet</div>
+          <div class="leg-legend-desc">Tricampeão mundial de Fórmula 1 — 1981, 1983 e 1987</div>
+        </div>
       </div>
-      <div class="cat-what-divider"></div>
-      <div class="cat-what-stat">
-        <span class="cat-what-stat-label">Massa total</span>
-        <span class="cat-what-stat-value">~500 kg</span>
+      <div class="leg-legend-item">
+        <div class="leg-legend-bar"></div>
+        <div>
+          <div class="leg-legend-name">Ayrton Senna</div>
+          <div class="leg-legend-desc">Tricampeão mundial de Fórmula 1 — Um ícone imortal</div>
+        </div>
       </div>
+      <div class="leg-legend-item">
+        <div class="leg-legend-bar" style="opacity:.25"></div>
+        <div>
+          <div class="leg-legend-name" style="color:rgba(202,211,2,.55)">Lotus · Colin Chapman</div>
+          <div class="leg-legend-desc">Origem do Caterham Seven — filosofia de performance pura</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div><!-- /leg-main -->
+
+  <!-- Carrossel de arquivo histórico -->
+  <div class="leg-carousel" aria-hidden="true">
+    <div class="leg-track">
+      <!-- Conjunto 1 -->
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/01.png"   alt="Arquivo histórico 01"   loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1125.png" alt="Arquivo histórico 1125" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1126.png" alt="Arquivo histórico 1126" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1127.png" alt="Arquivo histórico 1127" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1128.png" alt="Arquivo histórico 1128" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1129.png" alt="Arquivo histórico 1129" loading="lazy">
+      <!-- Conjunto 2 (duplicata para loop infinito) -->
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/01.png"   alt="" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1125.png" alt="" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1126.png" alt="" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1127.png" alt="" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1128.png" alt="" loading="lazy">
+      <img class="leg-track-img" src="Brand/Imagem/se%C3%A7%C3%A3o-dna-que-vem-da-pista/1129.png" alt="" loading="lazy">
     </div>
   </div>
 
-  <div class="cat-what-line-accent" aria-hidden="true"></div>
 </section>
 
 <!-- ============================================================
@@ -3694,6 +4175,16 @@
           <span class="plt-new-name">Rafael Suzuki</span>
         </div>
       </article>
+
+      <!-- Rubens Barrichello -->
+      <article class="plt-new-card">
+        <div class="plt-new-photo-wrap">
+          <img src="Brand/Imagem/se%C3%A7%C3%A3o-11/rubens-barrichelo.jpg" alt="Rubens Barrichello" loading="lazy">
+        </div>
+        <div class="plt-new-overlay">
+          <span class="plt-new-name">Rubens Barrichello</span>
+        </div>
+      </article>
     </div>
 
     <p class="plt-new-caption" data-r>
@@ -3705,6 +4196,41 @@
       <a href="https://wa.me/5515998570854" target="_blank" rel="noopener" class="btn btn-lime">
         FALAR COM O TIME
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ALÉM DA PISTA — PAINEL COM PILOTOS
+     ============================================================ -->
+<style>
+  #sec-panel { background: var(--emerald-d); padding: 120px 0; }
+  .panel-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px; }
+  .panel-body { font-size: clamp(16px,1.5vw,20px); line-height: 1.75; color: rgba(255,255,255,.85); }
+  .panel-body + .panel-body { margin-top: 20px; font-size: clamp(15px,1.3vw,17px); color: rgba(255,255,255,.7); }
+  .panel-names { display: flex; flex-direction: column; gap: 1px; }
+  .panel-name-row { padding: 18px 0; border-bottom: 1px solid rgba(202,211,2,.15); font-family: 'IBM Plex Sans Condensed', sans-serif; font-size: clamp(16px,1.6vw,20px); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--paper); }
+  .panel-name-row:last-child { border-bottom: none; }
+  @media (max-width: 768px) { .panel-inner { grid-template-columns: 1fr; gap: 40px; } }
+</style>
+<section id="sec-panel">
+  <div class="wrap">
+    <div data-r="up">
+      <span class="label">Painel</span>
+      <h2 style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--paper);margin:8px 0 0;line-height:1">ALÉM<br><em style="color:var(--lime);font-style:italic">DA PISTA</em></h2>
+    </div>
+    <div class="panel-inner" data-r="up">
+      <div>
+        <p class="panel-body">Os pilotos não são apenas convidados. Eles são parte da programação — e essa distinção muda completamente o que os participantes vivem no dia.</p>
+        <p class="panel-body">Átila Abreu, Rubens Barrichello, Nelson Piquet Jr. e Rafael Suzuki participam de um painel de troca real com os participantes. Histórias de carreiras construídas sob pressão extrema, decisões tomadas em frações de segundo — em conversa direta com quem está na plateia.</p>
+        <p class="panel-body">Não é palestra. É conversa direta — dois mundos que enfrentam os mesmos desafios com linguagens diferentes.</p>
+      </div>
+      <div class="panel-names">
+        <div class="panel-name-row">Átila Abreu</div>
+        <div class="panel-name-row">Rubens Barrichello</div>
+        <div class="panel-name-row">Nelson Piquet Jr.</div>
+        <div class="panel-name-row">Rafael Suzuki</div>
+      </div>
     </div>
   </div>
 </section>
@@ -4210,6 +4736,56 @@
   });
 })();
 
+/* ── Ativações carousel: arrow navigation + dots ── */
+(function () {
+  var wrap  = document.querySelector('.atv-scroll-wrap');
+  var inner = document.querySelector('.atv-scroll-track');
+  var prev  = document.getElementById('atvPrev');
+  var next  = document.getElementById('atvNext');
+  var dotsC = document.getElementById('atvDots');
+  if (!wrap || !inner || !prev || !next) return;
+
+  var cards = Array.from(inner.querySelectorAll('.atv-scroll-card'));
+  var total = cards.length;
+  var current = 0;
+
+  // Build dots
+  var dots = cards.map(function(_, i) {
+    var d = document.createElement('span');
+    d.className = 'atv-nav-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', function() { goTo(i); });
+    if (dotsC) dotsC.appendChild(d);
+    return d;
+  });
+
+  function updateDots(idx) {
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+  }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, total - 1));
+    var card = cards[current];
+    wrap.scrollTo({ left: card.offsetLeft - 22, behavior: 'smooth' });
+    updateDots(current);
+  }
+
+  prev.addEventListener('click', function() { goTo(current - 1); });
+  next.addEventListener('click', function() { goTo(current + 1); });
+
+  // Sync dots on manual scroll
+  wrap.addEventListener('scroll', function() {
+    var mid = wrap.scrollLeft + wrap.clientWidth / 2;
+    var closest = 0, minDist = Infinity;
+    cards.forEach(function(c, i) {
+      var dist = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    if (closest !== current) { current = closest; updateDots(current); }
+  }, { passive: true });
+})();
+
   /* -- Caterham Exp Scatter → Panel (sec-caterham-exp) -- */
 (function() {
   var section = document.getElementById('sec-caterham-exp');
@@ -4253,11 +4829,12 @@
 
   // Calcula posições das linhas dinamicamente para preencher 100vh sem espaços
   function calcMobileGrid(vw, vh) {
-    var cardW = Math.min(Math.max(85, vw * 0.28), 130);
+    var cardW = Math.min(Math.max(90, vw * 0.31), 145);
     var cardH = cardW * 1.5; // aspect-ratio 2/3 → height = width × 3/2
     var cardHvh = cardH / vh * 100;
     var rows = 4;
-    var gap = Math.max(0.8, (100 - rows * cardHvh) / (rows - 1));
+    var idealGap = (100 - rows * cardHvh) / (rows - 1);
+    var gap = Math.min(cardHvh * 0.42, Math.max(0.8, idealGap));
     var rowSpacing = cardHvh + gap;
     var r0Y = -1.5 * rowSpacing;
     var col = 30;
