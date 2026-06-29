@@ -1,9 +1,6 @@
-.vercel
-node_modules/
-package.json
-package-lock.json
-
 # Vídeos originais grandes — hospedados via Vercel Blob
 assets/depoimentos/desk-depoimento.mp4
 assets/depoimentos/desk-mobile.mp4
-.env*.local
+
+# Claude
+.claude/
