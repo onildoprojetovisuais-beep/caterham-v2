@@ -7,3 +7,9 @@ package-lock.json
 assets/depoimentos/desk-depoimento.mp4
 assets/depoimentos/desk-mobile.mp4
 .env*.local
+
+# Material bruto de referência (fonte original, não usado pelo site — as
+# versões otimizadas/comprimidas já estão em assets/)
+video/modelos-caterham/
+Brand/Imagem/team-bulding/
+Brand/Imagem/seção-dna-que-vem-da-pista/carrossel/
