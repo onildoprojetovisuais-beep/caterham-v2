@@ -931,78 +931,6 @@
   });
 }());
 
-/* ── Modal escassez 1º Lote ── */
-(function () {
-  var modal = document.getElementById('scarcity-modal');
-  if (!modal) return;
-
-  var overlay  = document.getElementById('scarcityOverlay');
-  var closeBtn = document.getElementById('scarcityClose');
-  var dismiss  = document.getElementById('scarcityDismiss');
-  var ctaBtn   = document.getElementById('scarcityCtaBtn');
-
-  var SESSION_KEY = 'scarcity_modal_seen';
-
-  function openModal() {
-    modal.classList.add('scarcity-modal--open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    // foco no botão principal para acessibilidade
-    if (ctaBtn) ctaBtn.focus();
-  }
-
-  function closeModal() {
-    modal.classList.remove('scarcity-modal--open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    // marca como visto na sessão
-    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch(e) {}
-  }
-
-  // Não mostra se já foi visto nesta sessão
-  try {
-    if (sessionStorage.getItem(SESSION_KEY)) return;
-  } catch(e) {}
-
-  // Abre após 4 segundos
-  var timer = setTimeout(openModal, 4000);
-
-  // Fecha ao scroll profundo (usuário claramente engajado)
-  function onScroll() {
-    if (window.scrollY > window.innerHeight * 0.8) {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', onScroll, { passive: true });
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // Fechar via overlay, X, dismiss
-  if (overlay)  overlay.addEventListener('click',  closeModal);
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (dismiss)  dismiss.addEventListener('click',  closeModal);
-
-  // CTA "VER OS PACOTES" — rola para seção e fecha
-  if (ctaBtn) {
-    ctaBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeModal();
-      var target = document.getElementById('sec-packages');
-      if (target) {
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 320); // aguarda animação de fechamento
-      }
-    });
-  }
-
-  // Fechar com Escape
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.classList.contains('scarcity-modal--open')) {
-      closeModal();
-    }
-  });
-}());
-
 /* ── pkg-card: settled state após animação de entrada ── */
 (function () {
   var grid = document.querySelector('.pkg-grid');
@@ -1060,12 +988,6 @@
     var btn = e.target.closest('.open-lead-modal');
     if (!btn) return;
     e.preventDefault();
-    // Suprime o popup de escassez, se estiver aberto, para não cobrir o lead-modal
-    var scarcityModal = document.getElementById('scarcity-modal');
-    if (scarcityModal && scarcityModal.classList.contains('scarcity-modal--open')) {
-      scarcityModal.classList.remove('scarcity-modal--open');
-      scarcityModal.setAttribute('aria-hidden', 'true');
-    }
     currentProductKey = btn.getAttribute('data-product-key') || '';
     currentCategory = btn.getAttribute('data-category') || '';
     currentProduct = btn.getAttribute('data-product') || '';
