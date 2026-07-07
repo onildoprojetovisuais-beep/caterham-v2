@@ -1116,7 +1116,7 @@
     } else {
       var waUrl = currentWaUrl;
       if (!waUrl) {
-        var msg = 'Olá! Meu nome é ' + nome + ' e tenho interesse na Race Experience (16/07).' +
+        var msg = 'Olá! Meu nome é ' + nome + ' e tenho interesse na Race Experience (26/07).' +
                   (tel ? ' Meu WhatsApp é ' + tel + '.' : '') + ' Pode me passar mais informações?';
         waUrl = 'https://wa.me/5515998570854?text=' + encodeURIComponent(msg);
       }
